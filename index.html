@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby Playards 婴儿游戏床类目市场调研报告 | US站</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{
+    --primary:#2f6fed; --primary-dark:#1d4fb8; --accent:#ff8a5b; --bg:#f5f7fb;
+    --card:#ffffff; --text:#1f2937; --muted:#6b7280; --border:#e5e7eb;
+    --good:#16a34a; --warn:#d97706; --bad:#dc2626;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px 60px;}
+  header.hero{max-width:1200px;margin:26px auto 0;background:linear-gradient(115deg,#0f2038 0%,#1d4fb8 58%,#3a7bf2 100%);color:#fff;border-radius:18px;padding:30px 36px 34px;box-shadow:0 12px 32px rgba(15,32,56,.28);}
+  header.hero .brand-row{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  header.hero .brand-logo{width:56px;height:56px;flex:none;display:flex;align-items:center;justify-content:center;}
+  header.hero .brand-logo img{width:100%;height:100%;object-fit:contain;display:block;}
+  header.hero .brand-name{font-size:19px;font-weight:700;letter-spacing:.3px;}
+  header.hero .brand-sub{font-size:12.5px;opacity:.82;margin-top:2px;}
+  header.hero h1{font-size:28px;margin:0 0 12px;letter-spacing:.3px;font-weight:700;}
+  header.hero .meta-line{font-size:13.5px;opacity:.88;}
+  header.hero .meta-line b{opacity:1;font-weight:600;}
+  .kpi-row{max-width:1200px;margin:24px auto 30px;padding:0 24px;display:grid;grid-template-columns:repeat(6,1fr);gap:16px;}
+  @media screen and (max-width:960px){.kpi-row{grid-template-columns:repeat(3,1fr);}}
+  @media screen and (max-width:560px){.kpi-row{grid-template-columns:repeat(2,1fr);}}
+  .kpi{background:var(--card);border-radius:14px;box-shadow:0 6px 20px rgba(20,30,60,.08);padding:18px 20px;text-align:center;border-top:4px solid var(--primary);}
+  .kpi .num{font-size:24px;font-weight:700;color:var(--primary-dark);}
+  .kpi .lbl{font-size:12.5px;color:var(--muted);margin-top:4px;}
+  section{margin:44px 0;}
+  .section-title{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+  .section-title .idx{background:var(--primary);color:#fff;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none;}
+  .section-title h2{font-size:20px;margin:0;}
+  .card{background:var(--card);border-radius:14px;box-shadow:0 4px 16px rgba(20,30,60,.06);padding:24px;border:1px solid var(--border);}
+  .grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media screen and (max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr;}}
+  .chart-box{position:relative;height:280px;}
+  .chart-box.tall{height:320px;}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--border);text-align:left;vertical-align:middle;}
+  th{background:#eef3ff;color:var(--primary-dark);font-weight:600;position:sticky;top:0;}
+  tr:hover td{background:#fafbff;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11.5px;font-weight:600;}
+  .badge.good{background:#e8f8ee;color:var(--good);}
+  .badge.warn{background:#fff4e5;color:var(--warn);}
+  .badge.bad{background:#fdeaea;color:var(--bad);}
+  .prod-img{width:56px;height:56px;object-fit:contain;border-radius:8px;border:1px solid var(--border);background:#fff;}
+  .rank{font-weight:700;color:var(--primary-dark);}
+  .muted{color:var(--muted);}
+  .insight-box{background:#f0f5ff;border-left:4px solid var(--primary);border-radius:8px;padding:16px 18px;margin-top:16px;font-size:14px;}
+  .insight-box b{color:var(--primary-dark);}
+  .flex-tags span{display:inline-block;background:#eef3ff;color:var(--primary-dark);border-radius:14px;padding:3px 10px;font-size:12px;margin:3px 4px 0 0;}
+  .flex-tags span.pain{background:#fdeaea;color:var(--bad);}
+  .two-col-list{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media screen and (max-width:860px){.two-col-list{grid-template-columns:1fr;}}
+  .two-col-list h4{margin:0 0 8px;font-size:15px;}
+  .two-col-list ol{margin:0;padding-left:20px;font-size:13.5px;}
+  .two-col-list li{margin-bottom:8px;}
+  .table-scroll{overflow-x:auto;}
+  tr.trend-row td{background:#f8fafc;padding:6px 14px 10px;border-top:none;}
+  .trend-wrap{display:flex;align-items:center;gap:10px;font-size:11.5px;color:#64748b;}
+  .trend-label{flex:none;font-weight:600;color:#475569;white-space:nowrap;}
+  .trend-spark{flex:none;display:block;}
+  .trend-range{flex:none;margin-left:auto;color:#94a3b8;white-space:nowrap;}
+  .trend-empty{font-size:11.5px;color:#94a3b8;font-style:italic;}
+  .brand-bar{height:10px;border-radius:6px;background:#eef1f7;overflow:hidden;}
+  .brand-bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));}
+  footer{text-align:center;color:var(--muted);font-size:12.5px;padding:30px 0 10px;}
+  .note{font-size:12px;color:var(--muted);margin-top:10px;}
+  .small-title{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--primary-dark);}
+
+  /* Interactive profit calculator */
+  .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:6px;}
+  @media screen and (max-width:860px){.calc-grid{grid-template-columns:1fr;}}
+  .calc-grid h4{margin:0 0 8px;font-size:13.5px;color:var(--primary-dark);border-bottom:1px dashed var(--border);padding-bottom:6px;}
+  .calc-grid h4:not(:first-child){margin-top:16px;}
+  .calc-field{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px;font-size:13px;}
+  .calc-field span{color:var(--text);flex:1;}
+  .calc-field input{width:110px;padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:13px;text-align:right;font-family:inherit;}
+  .calc-field input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 2px rgba(47,111,237,.15);}
+  .calc-field .unit{color:var(--muted);font-size:11.5px;width:26px;flex:none;}
+  .calc-reset{display:inline-block;margin-top:4px;padding:6px 14px;font-size:12.5px;border-radius:8px;border:1px solid var(--primary);color:var(--primary);background:#fff;cursor:pointer;}
+  .calc-reset:hover{background:#eef3ff;}
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0 10px;}
+  .stat-box{background:#f7f9fd;border:1px solid var(--border);border-radius:10px;padding:12px 14px;text-align:center;}
+  .stat-box .v{font-size:19px;font-weight:700;color:var(--primary-dark);}
+  .stat-box .v.neg{color:var(--bad);}
+  .stat-box .l{font-size:11.5px;color:var(--muted);margin-top:3px;}
+  .calc-flex{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;}
+  .calc-flex>div:first-child{flex:1 1 260px;min-width:240px;}
+
+  /* Product selling-point / pain-point cards */
+  .prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px;}
+  @media screen and (max-width:900px){.prod-grid{grid-template-columns:1fr;}}
+  .prod-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:0 4px 14px rgba(20,30,60,.05);}
+  .prod-card .prod-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px;}
+  .prod-card .prod-head img{width:64px;height:64px;object-fit:contain;border-radius:10px;border:1px solid var(--border);background:#fff;flex:none;}
+  .prod-card .prod-head h5{margin:0 0 3px;font-size:14.5px;}
+  .prod-card .prod-head .meta{font-size:12px;color:var(--muted);}
+  .prod-card .prod-head .meta a{color:var(--primary);text-decoration:none;}
+  .sp-tags span{display:inline-block;background:#eef8f0;color:var(--good);border-radius:12px;padding:2px 9px;font-size:11.5px;margin:2px 4px 2px 0;}
+  .review-quote{margin-top:10px;background:#fbfbfc;border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:12.5px;}
+  .review-quote .rq-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;}
+  .review-quote .stars{color:#f5a623;letter-spacing:1px;font-size:12px;}
+  .review-quote .vbadge{background:#fff4e5;color:#b45309;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:6px;}
+  .review-quote .unverified{background:#f1f2f4;color:var(--muted);font-size:10.5px;font-weight:600;padding:1px 6px;border-radius:6px;}
+  .review-quote .rq-author{font-weight:700;color:var(--text);font-size:12.5px;}
+  .review-quote .rq-date{color:var(--muted);font-size:11px;margin-left:auto;}
+  .review-quote .rq-title{font-weight:700;margin:2px 0 3px;color:var(--text);}
+  .review-quote .rq-text{color:#374151;line-height:1.55;}
+  .review-quote.empty{color:var(--muted);font-style:italic;background:#f7f8fa;}
+  .review-quote .rq-label{display:inline-block;font-size:11px;color:var(--bad);font-weight:700;margin-bottom:4px;}
+
+  /* ============ 打印/另存为PDF专用样式 ============
+     浏览器打印时页面宽度(A4≈794px / Letter≈816px)会小于上面的860/900px响应式断点，
+     导致两栏布局被误判为"手机屏幕"而被上面的 @media screen 规则强制变成单栏，
+     这就是"打印PDF后排版跟网页不一样"的根本原因。
+     下面用 @media print 把关键布局强制锁回桌面版效果，并保留背景色/渐变、控制分页。 */
+  @media print{
+    *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; color-adjust:exact !important; }
+    @page{ size:A4; margin:12mm 10mm; }
+    body{ background:#fff; }
+    .wrap{ max-width:100%; padding:0 4mm 10mm; }
+    .kpi-row{ max-width:100%; padding:0 4mm; margin-top:16px; }
+    header.hero{ margin:4mm auto 0; padding:22px 24px 26px; border-radius:12px; }
+    header.hero h1{ font-size:21px; }
+    header.hero .brand-logo{ width:44px; height:44px; }
+    /* 强制保持桌面多栏布局，不随打印页宽收窄成单栏 */
+    .grid-2{ grid-template-columns:1.1fr .9fr !important; }
+    .grid-3{ grid-template-columns:repeat(3,1fr) !important; }
+    .two-col-list{ grid-template-columns:1fr 1fr !important; }
+    .prod-grid{ grid-template-columns:repeat(2,1fr) !important; }
+    /* 只对"原子级"小组件禁止拆分，大容器(section/.card/长表格/20+卡片网格)允许跨页断开——
+       此前对整个 section/.card 设置 break-inside:avoid，导致 Top50表格、20张卖点卡片等
+       较高的整块内容一旦在当前页放不下，就会被整体推到下一页，在上一页留下大片空白，
+       这正是"打印/另存PDF后出现很多空白"的根因。改为只锁定小尺寸元素，大容器允许自然分页。 */
+    section{ margin:18px 0; }
+    .card,.prod-card{ box-shadow:none; }
+    .kpi,.stat-box,.chart-box,.prod-card,.insight-box{ break-inside:avoid; page-break-inside:avoid; }
+    table{ break-inside:auto; }
+    tr{ break-inside:avoid; page-break-inside:avoid; }
+    thead{ display:table-header-group; } /* 表格跨页时表头自动在每页重复，避免第二页开始看不到列名 */
+    tfoot{ display:table-footer-group; }
+    .section-title{ break-after:avoid; page-break-after:avoid; }
+    th{ position:static; } /* sticky 表头在打印分页时会重复错位，改为静态，交给 thead 的 table-header-group 处理跨页重复 */
+    a{ color:inherit; text-decoration:none; }
+    /* 利润测算器：打印/PDF时把输入框变成纯文字快照，隐藏"重置"按钮和本地保存提示（这些在纸上没有意义） */
+    .calc-field input{ border:none; background:transparent; -webkit-appearance:none; appearance:none;
+      font-weight:700; color:var(--primary-dark); font-family:inherit; padding:0; text-align:right; }
+    .calc-reset, #pcSaveStatus{ display:none !important; }
+    .calc-flex{ break-inside:avoid; page-break-inside:avoid; }
+    .pdf-snapshot-note{ display:block !important; }
+  }
+  .pdf-snapshot-note{ display:none; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="brand-row">
+    <div class="brand-logo">
+      <img src="data:image/png;base64,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" alt="ZT Group logo" />
+    </div>
+    <div>
+      <div class="brand-name">ZT Group · Global Marketing Center</div>
+      <div class="brand-sub">中童集团 · 全球营销中心 · 市场调研</div>
+    </div>
+  </div>
+  <h1>美国站婴儿游戏床(Baby Playards)类目深度分析看板</h1>
+  <div class="meta-line">Amazon US · Baby Playards · 节点 166841011 | 样本 BSR Top100(在架 1,410 SKU) | 数据:卖家精灵 SellerSprite，2026-07-11</div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi"><div class="num">177,494</div><div class="lbl">样本月销量（件/月）</div></div>
+  <div class="kpi"><div class="num">$1,509万</div><div class="lbl">样本月销售额（美元/月）</div></div>
+  <div class="kpi"><div class="num">$109.61</div><div class="lbl">样本平均单价</div></div>
+  <div class="kpi"><div class="num">1,410</div><div class="lbl">类目在架商品总数</div></div>
+  <div class="kpi"><div class="num">67</div><div class="lbl">样本内品牌数</div></div>
+  <div class="kpi"><div class="num">4.6★</div><div class="lbl">样本平均评分</div></div>
+</div>
+
+<div class="wrap">
+
+  <!-- 1. 市场概况与规模 -->
+  <section>
+    <div class="section-title"><div class="idx">1</div><h2>市场概况与规模</h2></div>
+    <div class="card">
+      <p>Baby Playards（婴儿游戏床/游戏围栏）是亚马逊美国 <b>Baby Products → Nursery → Furniture → Playards</b> 下的细分类目，类目全站在架商品约 <b>1,410个</b>，样本内最早上架历史可追溯至 <b>2013-01-22</b>，最新上架商品为 <b>2026-05-14</b>。取样本内 BSR Top100 核心 ASIN（占据类目绝大部分实际成交）统计：</p>
+      <div class="grid-3">
+        <div class="card" style="box-shadow:none;border:1px dashed var(--border);">
+          <div class="small-title">规模</div>
+          样本月销量 <b>≈177,494件</b><br>样本月销售额 <b>≈US$15,090,230</b><br>平均客单价 <b>$109.61</b>
+        </div>
+        <div class="card" style="box-shadow:none;border:1px dashed var(--border);">
+          <div class="small-title">头部集中度</div>
+          Top10「高销量」listing 平均月销 <b>8,238件</b>、月销售额 <b>$424,343</b>、均价 <b>$53.44</b>；Top10 合计约占样本总量的 <b>46.4%（销量）/ 28.1%（销售额）</b>——高销量头部反而单价明显低于样本均价，说明走量款以低价入门产品为主
+        </div>
+        <div class="card" style="box-shadow:none;border:1px dashed var(--border);">
+          <div class="small-title">新品表现</div>
+          近6个月新品占比 <b>7%</b>（7款，样本内口径），新品平均月销 <b>1,293件</b>，平均月销售额 <b>$231,101</b>，平均评分 4.8，平均评论数仅 1,015 条
+        </div>
+      </div>
+      <div class="insight-box">
+        <b>结论：</b>婴儿游戏床是一个 <b>价格带跨度极大（$18-$270+）、销量高度集中在低价爆款、但销售额被中高价品牌明显反哺</b> 的细分类目 —— 我们按验证销量重新核实并排序后的 Top50 表格（第8节）合计月销 <b>151,869件</b>、月销售额 <b>$12,584,424</b>，加权平均单价仅 <b>$82.86</b>，明显低于全量样本简单平均单价$109.61，印证了"销量向低价款集中"的特征；品牌格局同样呈"长尾分散但头部三强清晰"型，样本内销量最大品牌 <b>Dream On Me</b> 占约 <b>16.44%</b> 销量（仅8.28%销售额），而 <b>Pamo babe</b> 凭中高价定位以14.16%销量拿下 <b>18.71%</b> 销售额，<b>Graco</b> 同样以11.42%销量拿下14.49%销售额（详见第6节）——"以价换量"和"以价换利"两条路径在本类目并存。值得关注的是新品榜第1名（Graco B0GD8Y27PV，$219.99）以近乎全类目最高价打入新品Top1，证明知名品牌在本类目仍具极强的信任溢价能力。评论区高频反馈显示"尺寸/床垫不匹配""折叠收纳困难""拉链/卡扣故障"等做工与说明书问题在多个品牌间反复出现（详见第10/13节），是该类目当前的主要差评来源。整体判断：<b>入局门槛中等（客单价跨度大，低价走量与品牌溢价两条路径均有成功案例），品牌壁垒尚未固化，产品尺寸标注准确性与折叠体验是决定复购与差评率的关键变量</b>。
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Google 趋势 -->
+  <section>
+    <div class="section-title"><div class="idx">2</div><h2>Google 搜索趋势分析（站外，"baby playard"，近5年）</h2></div>
+    <div class="card">
+      <div class="chart-box tall"><canvas id="trendChart"></canvas></div>
+      <div class="insight-box">
+        <b>结论：</b>"baby playard" 的 Google 搜索热度指数在 2021-2026年初长期维持在 7-16 的低位窄幅波动，属于长期稳定的存量需求关键词，未见明显季节性或增长性趋势；进入 2026 年第二季度后热度出现异常跃升，3月指数27、4月单月达到 78（历史峰值），5、6月维持在60-70高位，随后7月骤降至8。由于7月数据大概率是当月未采集完整的部分月数据（本次报告核实日为2026-07-11，7月仅过去11天），<b>不应将7月的骤降解读为需求真实回落</b>；同时3-6月的跃升样本窗口较短、峰值原因未知（可能与社媒话题、促销季或统计口径调整有关），建议后续季度持续跟踪验证是否为稳定的需求增长，暂不作为站外流量长期增长的确定性依据。
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 价格区间分布 -->
+  <section>
+    <div class="section-title"><div class="idx">3</div><h2>价格区间分布</h2></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="chart-box"><canvas id="priceChart"></canvas></div>
+      </div>
+      <div class="card">
+        <table>
+          <thead><tr><th>价格区间</th><th>商品数</th><th>销量占比</th></tr></thead>
+          <tbody>
+            <tr><td><b>$0–50</b></td><td>20</td><td><b>41.47%</b></td></tr>
+            <tr><td>$50–100</td><td>35</td><td>32.31%</td></tr>
+            <tr><td>$100–150</td><td>23</td><td>12.40%</td></tr>
+            <tr><td>$150–200</td><td>16</td><td>8.71%</td></tr>
+            <tr><td>$200–250</td><td>4</td><td>4.43%</td></tr>
+            <tr><td>$250以上</td><td>2</td><td>0.67%</td></tr>
+          </tbody>
+        </table>
+        <p class="note">$0-50 与 $50-100 两个中低价带商品数最多（20+35=55款），合计贡献超七成销量（73.78%），是婴儿游戏床类目的绝对主流价格区间；$150以上中高价带虽商品数不少（22款），合计销量占比仅13.81%，说明本类目消费者对价格更敏感，低价入门款走量能力显著强于中高价款。</p>
+      </div>
+    </div>
+    <div class="insight-box">
+      <b>结论：</b>与床边婴儿床等高客单价细分类目不同，婴儿游戏床类目的价格重心明显偏低——$0-100 区间合计55款商品、贡献 <b>73.78%</b> 的销量，是绝对主流竞争带；$200以上高端段虽仅6款、销量占比合计5.10%，但对应的正是 Graco「多功能婴儿床」、Guava Family「可折叠旅行款」等强调结构/材质差异化的品牌，销售额贡献明显高于其销量占比，说明品牌溢价空间依然存在，只是需要靠"多功能/可折叠旅行/双层床垫"等具体结构卖点支撑，而非单纯堆料提价。
+    </div>
+  </section>
+
+  <!-- 4. 评分与评论数分布 -->
+  <section>
+    <div class="section-title"><div class="idx">4</div><h2>评分 &amp; 评论数分布（市场成熟度与新品门槛）</h2></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="small-title">评分值分布</div>
+        <div class="chart-box"><canvas id="ratingChart"></canvas></div>
+        <p class="note">4.5分以上商品合计贡献 <b>53.62%</b> 的销量，4.3-4.5分商品贡献44.9%，两者合计超98%——评分低于4.3分的商品在样本内销量占比合计仅1.48%，消费者对评分同样极为敏感，但本类目"4.3-4.5分"档的销量份额明显高于多数母婴品类，说明评分门槛相对宽松。</p>
+      </div>
+      <div class="card">
+        <div class="small-title">评论数分布</div>
+        <div class="chart-box"><canvas id="ratingsCountChart"></canvas></div>
+        <p class="note">评论数500+的63款商品占据 <b>83.75%</b> 的销量，是绝对主导区间，评论护城河效应比多数细分类目更明显；但300条以下的18款商品合计仍拿下约 <b>7.98%</b> 销量，说明新品并非完全没有突围空间。</p>
+      </div>
+    </div>
+    <div class="insight-box">
+      <b>结论：</b>婴儿游戏床类目呈现出比多数母婴细分品类更强的"评论护城河"——500+评论的成熟listing占据高达 <b>83.75%</b> 的销量，200条以下评论的商品合计销量占比仅3.10%，说明多数流量集中在已经沉淀大量评论的老牌listing手中。但第9节新品榜数据显示，个别新品（如Graco B0GD8Y27PV仅评论5,797条却上架155天即冲上榜首）能凭借品牌信任快速积累评论并起量，说明<b>知名品牌背书可以部分抵消评论数门槛，但纯新兴白牌新品需要更长时间积累信任</b>。
+    </div>
+  </section>
+
+  <!-- 5. 上架时间分布 -->
+  <section>
+    <div class="section-title"><div class="idx">5</div><h2>上架时间分布（新老品竞争格局）</h2></div>
+    <div class="card">
+      <div class="chart-box"><canvas id="listingDateChart"></canvas></div>
+      <div class="insight-box">
+        <b>结论：</b>上架3年以上的41款"老品"贡献了高达 <b>59.53%</b> 的销量份额，是绝对主导；叠加3年档后合计约75.3%——证明婴儿游戏床类目<b>老品护城河非常牢固</b>，与第4节"评论500+占83.75%销量"的结论相互印证：这是一个存量老品长期占据主要份额、评论沉淀壁垒较高的成熟类目。但1年半以内新品（3个月+半年+1年+1年半档）合计仍贡献约 <b>15.3%</b> 的销量份额，且第9节新品榜显示Graco等知名品牌新品可以在半年内快速冲上高位，说明<b>新进入者若无品牌背书，需要更长的时间和更强的评论/内容运营投入才能撼动存量老品的份额</b>。
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 品牌集中度与市场份额 -->
+  <section>
+    <div class="section-title"><div class="idx">6</div><h2>品牌集中度与市场份额</h2></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="chart-box tall"><canvas id="brandChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="table-scroll">
+        <table>
+          <thead><tr><th>排名</th><th>品牌</th><th>SKU数</th><th>均价</th><th>评分</th><th>销量占比</th><th>销售额占比</th></tr></thead>
+          <tbody>
+<tr><td>1</td><td><b>Dream On Me</b></td><td>3</td><td>$46.51</td><td>4.5</td><td>16.44%</td><td>8.28%</td></tr>
+<tr><td>2</td><td><b>Pamo babe</b></td><td>15</td><td>$126.62</td><td>4.7</td><td>14.16%</td><td>18.71%</td></tr>
+<tr><td>3</td><td><b>Graco</b></td><td>4</td><td>$115.24</td><td>4.8</td><td>11.42%</td><td>14.49%</td></tr>
+<tr><td>4</td><td><b>Hiaksedt</b></td><td>1</td><td>$39.98</td><td>4.5</td><td>8.43%</td><td>3.96%</td></tr>
+<tr><td>5</td><td><b>XVISHX</b></td><td>2</td><td>$41.97</td><td>4.3</td><td>3.96%</td><td>1.89%</td></tr>
+<tr><td>6</td><td><b>Jaobeem</b></td><td>2</td><td>$49.97</td><td>4.4</td><td>3.89%</td><td>2.28%</td></tr>
+<tr><td>7</td><td><b>Fshibila</b></td><td>2</td><td>$43.98</td><td>4.4</td><td>3.59%</td><td>2.06%</td></tr>
+<tr><td>8</td><td><b>Baby Trend</b></td><td>3</td><td>$135.32</td><td>4.7</td><td>3.57%</td><td>4.20%</td></tr>
+<tr><td>9</td><td><b>Fodoss</b></td><td>1</td><td>$39.99</td><td>4.7</td><td>2.32%</td><td>1.09%</td></tr>
+<tr><td>10</td><td><b>Cbcvvaer</b></td><td>2</td><td>$106.49</td><td>4.6</td><td>1.29%</td><td>1.60%</td></tr>
+<tr><td>11</td><td><b>Dripex</b></td><td>2</td><td>$72.99</td><td>4.5</td><td>1.29%</td><td>0.88%</td></tr>
+<tr><td>12</td><td><b>Guava Family</b></td><td>1</td><td>$249.95</td><td>4.7</td><td>1.26%</td><td>3.71%</td></tr>
+<tr><td>13</td><td><b>UANLAUO</b></td><td>1</td><td>$39.99</td><td>4.6</td><td>1.17%</td><td>0.55%</td></tr>
+<tr><td>14</td><td><b>HUTOCADA</b></td><td>3</td><td>$121.33</td><td>4.7</td><td>1.17%</td><td>1.91%</td></tr>
+<tr><td>15</td><td><b>Obee Odee</b></td><td>2</td><td>$161.49</td><td>4.7</td><td>1.11%</td><td>2.27%</td></tr>
+<tr><td>16</td><td><b>Ulnxiy</b></td><td>2</td><td>$101.49</td><td>4.6</td><td>1.10%</td><td>1.74%</td></tr>
+<tr><td>17</td><td><b>Orian</b></td><td>1</td><td>$49.99</td><td>4.4</td><td>1.10%</td><td>0.65%</td></tr>
+<tr><td>18</td><td><b>Baby Delight</b></td><td>1</td><td>$59.90</td><td>4.7</td><td>1.02%</td><td>0.72%</td></tr>
+<tr><td>19</td><td><b>Funsland</b></td><td>1</td><td>$65.99</td><td>4.8</td><td>0.88%</td><td>0.68%</td></tr>
+<tr><td>20</td><td><b>ZEEBABA</b></td><td>2</td><td>$54.99</td><td>4.5</td><td>0.87%</td><td>0.54%</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="note">占比均为该品牌销量/销售额占样本总量（177,494件 / $15,090,230）的比例。Top10 品牌合计覆盖样本约 <b>69.1%</b> 的销量、<b>58.6%</b> 的销售额，Top20 品牌合计覆盖约 <b>80.0%</b> 的销量、<b>72.2%</b> 的销售额（样本内共67个品牌，长尾47个品牌合计约占20%销量、28%销售额，未单独列出）；第一大品牌 Dream On Me 占 <b>16.44%</b> 销量但仅 <b>8.28%</b> 销售额（低价策略），格局虽有明显头部但尚未形成绝对垄断。</p>
+      </div>
+    </div>
+    <div class="insight-box">
+      <b>结论：</b>婴儿游戏床类目品牌集中度呈<b>"头部三强+长尾分散"</b>格局——Top3品牌（Dream On Me / Pamo babe / Graco）合计占约 <b>42.0%</b> 的销量、<b>41.5%</b> 的销售额，明显高于床边婴儿床等分散型类目，但仍未形成单一垄断者；Dream On Me 以16.44%销量、仅8.28%销售额的组合说明其主打<b>低价跑量款</b>，而 Pamo babe（15个SKU覆盖多价格带）与 Graco（4个SKU、均价$115+）则分别代表"多SKU密集铺货"与"品牌溢价"两种截然不同的打法，且都取得了明显高于Dream On Me的销售额占比。Guava Family 以单SKU、$249.95高价拿到3.71%销售额（仅1.26%销量），进一步验证高端认证/可折叠旅行款细分定位的可行性。整体判断：<b>该类目已有三家相对领先的品牌，但格局仍未固化，新进入者若聚焦中高端结构化差异定位（如双层设计、可折叠旅行款），仍有明显进入空间</b>。
+    </div>
+  </section>
+
+  <!-- 7. 卖家集中度 -->
+  <section>
+    <div class="section-title"><div class="idx">7</div><h2>卖家集中度</h2></div>
+    <div class="card">
+      <table>
+        <thead><tr><th>排名</th><th>卖家</th><th>SKU数</th><th>销量占比</th><th>销售额占比</th></tr></thead>
+        <tbody>
+<tr><td>1</td><td><b>Amazon</b></td><td>21</td><td>24.91%</td><td>25.95%</td></tr>
+<tr><td>2</td><td>Pamo Babe</td><td>15</td><td>14.16%</td><td>18.71%</td></tr>
+<tr><td>3</td><td>shuoxi</td><td>1</td><td>8.43%</td><td>3.96%</td></tr>
+<tr><td>4</td><td>XVISHX</td><td>2</td><td>3.96%</td><td>1.89%</td></tr>
+<tr><td>5</td><td>Yuan Maoshi</td><td>2</td><td>3.89%</td><td>2.28%</td></tr>
+<tr><td>6</td><td>Zhuoyi US</td><td>2</td><td>3.59%</td><td>2.06%</td></tr>
+<tr><td>7</td><td>ANXINGDAUS</td><td>1</td><td>2.32%</td><td>1.09%</td></tr>
+<tr><td>8</td><td>RUID-US</td><td>2</td><td>1.29%</td><td>1.60%</td></tr>
+<tr><td>9</td><td>Dripex Baby-OQS US</td><td>2</td><td>1.29%</td><td>0.88%</td></tr>
+<tr><td>10</td><td>Guava Family</td><td>1</td><td>1.26%</td><td>3.71%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">按卖家运营方式划分，样本内 <b>Amazon自营（品牌方1P托管）</b>贡献最高的 <b>24.91%</b> 销量占比（21个ASIN，覆盖多个品牌委托Amazon Retail代运营）；其余为FBA/FBM第三方卖家，其中 <b>Pamo Babe</b> 一家即凭15个SKU拿到 <b>14.16%</b> 销量/<b>18.71%</b> 销售额，是Top10中唯一的单一垂直大卖家，其余卖家多为1-2个SKU的中小型跨境卖家。</p>
+      <div class="insight-box">
+        <b>结论：</b>卖家集中度呈现<b>"Amazon自营渠道领先+单一垂直大卖家(Pamo Babe)紧随其后+长尾中国卖家分散"</b>的格局——Top2卖家（Amazon、Pamo Babe）合计占据约 <b>39.1%</b> 销量、<b>44.7%</b> 销售额，集中度高于品牌层面的Top2（27.9%销量），说明部分品牌背后由单一卖家账号集中运营多个SKU（如Pamo Babe同时对应15款商品）；shuoxi、XVISHX、Yuan Maoshi、Zhuoyi US、ANXINGDAUS 等中国卖家账号合计占据Top10中的多数席位，多为1-2个SKU的中小规模运营，是价格带下沉与快速迭代的主要供给方。<b>Guava Family</b> 以单SKU高客单价（$249.95）拿到3.71%销售额（仅1.26%销量），验证了小而美的高端垂直卖家路径同样可行。
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Top50 产品数据 -->
+  <section>
+    <div class="section-title"><div class="idx">8</div><h2>Top 50 产品数据（按验证月销量排序）</h2></div>
+    <div class="card table-scroll">
+      <table id="top20table">
+        <thead>
+          <tr>
+            <th>#</th><th>图片</th><th>ASIN</th><th>品牌</th><th>月销量</th><th>月销售额</th><th>价格</th><th>评分数</th><th>评分</th><th>上架日期</th><th>上架天数</th>
+          </tr>
+        </thead>
+        <tbody id="top20body"></tbody>
+      </table>
+      <p class="note">数据取自 SellerSprite 2026年6月类目样本（类目全站在架约1,410个SKU），并于2026年7月对每个ASIN的月销量单独核实（对照 asin_sales_trend 6月实际值重新排序）；销售额＝核实后的月销量 × 该ASIN原始快照中的平均单价（近似值，非逐月真实成交额，详见第15节说明）；"上架天数"以报告核实日期 2026-07-11 计算。合计：Top50总月销量 <b>151,869件</b>，总月销售额 <b>$12,584,424</b>，加权平均单价 <b>$82.86</b>。</p>
+    </div>
+  </section>
+
+  <!-- 9. 新品榜 Top20 -->
+  <section>
+    <div class="section-title"><div class="idx">9</div><h2>新品榜 Top 20（近6个月内上架，按验证月销量排序）</h2></div>
+    <div class="card table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th><th>图片</th><th>ASIN</th><th>品牌</th><th>月销量</th><th>月销售额</th><th>价格</th><th>评分数</th><th>评分</th><th>上架日期</th><th>上架天数</th>
+          </tr>
+        </thead>
+        <tbody id="newProdBody"></tbody>
+      </table>
+      <p class="note">"新品"定义：首次上架日期在 2026-01-10 及以后的独立ASIN（排除同款变体重复计数）；此处取核实后月销量最高的20款；数据同取自 SellerSprite 2026年6月类目样本并于2026年7月核实。20款平均月销 <b>707件</b>，平均月销售额 <b>$122,137</b>，平均评分 <b>4.43</b>。</p>
+      <div class="insight-box">
+        <b>结论：</b>新品榜榜首出人意料地是 <b>Graco(B0GD8Y27PV，$219.99)</b>，上架仅155天即达5,002件/月、销售额$110万/月，远超其余19款新品，是全类目新品中最典型的"品牌信任高溢价"成功案例；紧随其后的 <b>Pamo babe（占据第2/3/14席，共3席）</b> 延续了其在第6节中"多SKU覆盖多价格带"的打法。值得警惕的是新品榜内评分明显分化——多数评分维持4.6-5.0，但 <b>suihuooo(B0H1GGRG8W) 评分仅1.5分</b>（2条评论），是本次核实中样本内评分最低的产品，反映部分新品品控极不稳定。另外，多款新品（如 B0GS5FV32V、B0FZGTGJSM、B0GD67TSD2）评分数仅二三十条却已有300+件/月销量，评论沉淀速度与销量明显不匹配，是本类目新品共性；从第10/11节的真实评论摘录看，"尺寸标注不符""折叠困难""螺丝/部件不匹配"等做工与说明书问题在新老品间反复出现，印证"机会点与细分市场"章节中产品标准化与说明书清晰度仍是新进入者可差异化竞争的方向。
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Top20 卖点与痛点 -->
+  <section>
+    <div class="section-title"><div class="idx">10</div><h2>Top 20 产品卖点与痛点</h2></div>
+
+    <div class="card">
+      <div class="two-col-list">
+        <div>
+          <h4>✅ 高频卖点（跨品牌共性）</h4>
+          <div class="flex-tags">
+            <span>带轮易移动</span><span>270度全景网面</span><span>可拆卸尿布台</span>
+            <span>内置玩具架</span><span>一键折叠收纳</span><span>双层设计带床垫</span>
+            <span>透气网眼布</span><span>多档高度调节</span><span>加厚地垫防摔</span>
+            <span>可折叠便携外出</span>
+          </div>
+        </div>
+        <div>
+          <h4>⚠️ 高频痛点（跨品牌共性）</h4>
+          <div class="flex-tags">
+            <span class="pain">尺寸标注与实际不符（配套床垫塞不进）</span><span class="pain">折叠/收合操作复杂</span>
+            <span class="pain">拉链故障</span><span class="pain">床垫过薄/无防护垫</span>
+            <span class="pain">支架/卡扣使用数月后断裂</span><span class="pain">组装说明书缺失或不清晰</span>
+            <span class="pain">安全担忧（结构不稳/倾斜）</span><span class="pain">评论沉淀速度与销量不匹配</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="note" style="margin-top:16px;">以下每张卡片对应一款 Top20 在售商品：左侧为产品实拍图与核心卖点标签，右侧"真实买家评价"卡片摘录自该 ASIN 在亚马逊评论区的<b>真实原文</b>（含评论者、星级、Verified Purchase标记与评论日期，数据取自 SellerSprite 评论接口，非截图但为逐字摘录，点击 ASIN 可直达商品页核对原文）。</p>
+    <div class="prod-grid" id="prodPainGrid"></div>
+  </section>
+
+  <!-- 11. 新品榜 Top20 卖点与痛点 -->
+  <section>
+    <div class="section-title"><div class="idx">11</div><h2>新品榜 Top 20 产品卖点与痛点</h2></div>
+
+    <div class="card">
+      <div class="two-col-list">
+        <div>
+          <h4>✅ 高频卖点（新品共性）</h4>
+          <div class="flex-tags">
+            <span>多档高度调节</span><span>双层设计带床垫</span><span>带轮易移动</span>
+            <span>270度全景网面</span><span>加厚地垫防摔</span><span>可折叠便携外出</span>
+            <span>一键折叠收纳</span><span>内置玩具架</span>
+          </div>
+        </div>
+        <div>
+          <h4>⚠️ 高频痛点（新品共性）</h4>
+          <div class="flex-tags">
+            <span class="pain">评论沉淀速度与销量明显不匹配</span><span class="pain">安装/收合体验差（门框过窄、螺丝不匹配）</span>
+            <span class="pain">吸盘/卡扣首次使用即脱落</span><span class="pain">同品牌多SKU重复铺货</span>
+            <span class="pain">锁扣设计不安全</span><span class="pain">评分样本过小暂不具参考意义</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="note" style="margin-top:16px;">以下每张卡片对应新品榜 Top20 中的一款商品：左侧为产品实拍图与核心卖点标签（提炼自 Listing 五点描述原文），右侧"真实买家评价"摘录自该 ASIN 在亚马逊评论区的<b>真实原文</b>（含评论者、星级、Verified Purchase标记与评论日期，数据取自 SellerSprite 评论接口，逐字摘录，点击 ASIN 可直达商品页核对原文）；部分新品因上架时间短、评论样本量过小（多数仅个位数至数十条），暂无可摘录的文字负面评论，已在卡片中注明。</p>
+    <div class="prod-grid" id="newProdPainGrid"></div>
+  </section>
+
+  <!-- 12. Top20 广告洞察 -->
+  <section>
+    <div class="section-title"><div class="idx">12</div><h2>Top 20 广告洞察（预估月度广告花费）</h2></div>
+    <div class="card">
+      <div class="stat-grid">
+        <div class="stat-box"><div class="v">$1,012,859</div><div class="l">Top20预估月度广告总投入</div></div>
+        <div class="stat-box"><div class="v">$50,643</div><div class="l">单品平均预估月广告花费</div></div>
+        <div class="stat-box"><div class="v">15%</div><div class="l">测算所用假设ACOS</div></div>
+        <div class="stat-box"><div class="v">30.5%</div><div class="l">Top3产品占Top20预估广告总投入比例</div></div>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>#</th><th>图片</th><th>ASIN</th><th>品牌</th><th>月销售额(估算，见第15节说明)</th><th>假设ACOS</th><th>预估月广告花费</th><th>占月销售额比例</th></tr></thead>
+          <tbody>
+<tr><td>1</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71YdsncxTFL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0BVLX15R2</td><td>Hiaksedt</td><td>$633,923</td><td>15%</td><td>$95,088</td><td>15.0%</td></tr>
+<tr><td>2</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/81Nae+oIBZL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B07WPW1YYC</td><td>Dream On Me</td><td>$536,371</td><td>15%</td><td>$80,456</td><td>15.0%</td></tr>
+<tr><td>3</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/81sSJhCojNL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B09MWHG3ZT</td><td>Graco</td><td>$887,569</td><td>15%</td><td>$133,135</td><td>15.0%</td></tr>
+<tr><td>4</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71I5iaHPHEL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0CKTLQ791</td><td>Jaobeem</td><td>$308,926</td><td>15%</td><td>$46,339</td><td>15.0%</td></tr>
+<tr><td>5</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/81jzxXpK5dL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0C5QXPFKB</td><td>Fshibila</td><td>$307,454</td><td>15%</td><td>$46,118</td><td>15.0%</td></tr>
+<tr><td>6</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/819qxqjmBqL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B09ZDQ3C2Y</td><td>Pamo babe</td><td>$336,759</td><td>15%</td><td>$50,514</td><td>15.0%</td></tr>
+<tr><td>7</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71uwtcD49IL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0CH2TZPL8</td><td>XVISHX</td><td>$224,918</td><td>15%</td><td>$33,738</td><td>15.0%</td></tr>
+<tr><td>8</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71yHhq5jAkL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B09Z2JP78L</td><td>Fodoss</td><td>$217,426</td><td>15%</td><td>$32,614</td><td>15.0%</td></tr>
+<tr><td>9</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/81V9AnXe5cL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B08BT16TH5</td><td>Dream On Me</td><td>$248,283</td><td>15%</td><td>$37,242</td><td>15.0%</td></tr>
+<tr><td>10</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/81ZrNiKDgOL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0GD8Y27PV</td><td>Graco</td><td>$1,100,390</td><td>15%</td><td>$165,058</td><td>15.0%</td></tr>
+<tr><td>11</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/81+pa+rUazL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B07964SFW4</td><td>Baby Trend</td><td>$372,113</td><td>15%</td><td>$55,817</td><td>15.0%</td></tr>
+<tr><td>12</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/81bu3anIXsL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0BHYYP48V</td><td>Dream On Me</td><td>$239,012</td><td>15%</td><td>$35,852</td><td>15.0%</td></tr>
+<tr><td>13</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/91F0mGgNUEL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B08CMPTJ2S</td><td>Pamo babe</td><td>$270,370</td><td>15%</td><td>$40,555</td><td>15.0%</td></tr>
+<tr><td>14</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71bX28gjFSL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0CKT7W65H</td><td>Jaobeem</td><td>$143,135</td><td>15%</td><td>$21,470</td><td>15.0%</td></tr>
+<tr><td>15</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71NEpug9YaL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B09MWJB3LF</td><td>Graco</td><td>$161,240</td><td>15%</td><td>$24,186</td><td>15.0%</td></tr>
+<tr><td>16</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71Q-EK2s9UL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0FBRND77P</td><td>UANLAUO</td><td>$92,377</td><td>15%</td><td>$13,857</td><td>15.0%</td></tr>
+<tr><td>17</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/81rY04g4NDL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B09Y8VGQPN</td><td>Dripex</td><td>$89,498</td><td>15%</td><td>$13,425</td><td>15.0%</td></tr>
+<tr><td>18</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/81JBB7UPhVL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0BS72HZXW</td><td>Graco</td><td>$202,347</td><td>15%</td><td>$30,352</td><td>15.0%</td></tr>
+<tr><td>19</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/81bM4pzmytL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0BMFQFZSH</td><td>Pamo babe</td><td>$250,216</td><td>15%</td><td>$37,532</td><td>15.0%</td></tr>
+<tr><td>20</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71ytDrR-IqL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0D8W5XFQ8</td><td>Funsland</td><td>$130,066</td><td>15%</td><td>$19,510</td><td>15.0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">卖家真实广告花费为其Amazon广告后台的私有数据，任何第三方市场调研工具（含卖家精灵）均无法获取竞品的真实广告预算。以上"预估月广告花费"＝月销售额(估算数据，详见第15节方法论说明) × 假设ACOS(15%，与本报告"可变动利润测算器"默认值一致，取母婴类目常见经验值)，用于同口径横向比较各产品的广告投入量级，<b>此为估算非真实广告后台数据，新品真实ACOS通常更高，不是</b>该产品的真实广告开支。</p>
+      <div class="insight-box">
+        <b>结论：</b>由于测算采用统一ACOS假设，预估广告花费的分布天然与销售额分布高度重合——Graco(B0GD8Y27PV)、Graco(B09MWHG3ZT)、Hiaksedt(B0BVLX15R2)头部3款产品合计占Top20预估广告总投入的 <b>30.5%</b>，集中度处于中等水平，说明Top20内部销售额分布相对均衡，没有单一产品形成绝对垄断。需要注意的是，实际情况中<b>头部成熟品牌（Graco、Dream On Me等）往往凭借更强的自然排名和评论基础，实际ACOS会明显低于15%</b>（广告依赖度更低），而新入局/长尾白牌产品（如Jaobeem、Fshibila、UANLAUO等中国跨境品牌）为了抢占初始排名，实际ACOS普遍需要拉高到20-40%甚至更高才能起量——也就是说，<b>新品牌的真实广告投入占销售额比例大概率高于本表所示的统一15%假设</b>，这也是新手起量阶段广告费是主要现金流压力项的原因。
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. 机会点与细分市场 -->
+  <section>
+    <div class="section-title"><div class="idx">13</div><h2>机会点与细分市场</h2></div>
+    <div class="card">
+      <div class="two-col-list">
+        <div>
+          <h4>🟢 机会点</h4>
+          <ol>
+            <li><b>头部三强占比不足42%，格局仍未固化</b>：Dream On Me / Pamo babe / Graco 合计仅占约42.0%销量/41.5%销售额（第6节），仍有过半市场分散在长尾47个品牌手中，新品牌有明显进入空间。</li>
+            <li><b>尺寸标注准确性升级</b>：评论区反复出现"配套床垫尺寸不符"（如B0BVLX15R2"Not 50x50, my 50x50 mat doesn't fit"、B0CH2TZPL8"Smaller than advertised...The standard mats for a 50 x 50 will not fit at all"），精确标注实际内部尺寸并附赠适配床垫是可感知的差异化卖点。</li>
+            <li><b>折叠/收纳体验优化</b>：多款产品被吐槽"折叠困难"（如B07WPW1YYC"very hard to lock in and to unlock"、B09ZDQ3C2Y"have to wrap it 5 times in a circle vs 4 times"），能真正做到"一键折叠"并附清晰图示说明的产品可建立信任壁垒。</li>
+            <li><b>说明书与组装引导补强</b>："无说明书/说明书不清晰"是新老品共性差评（如B0BS72HZXW"Came without an assembly manual"、B0GGB6WK92"There's a booklet but it does not actually explain anything"），视频教程+清晰图文说明书是低成本高回报的改进点。</li>
+            <li><b>$150-250 中高端结构化细分</b>：Graco、Guava Family 等品牌证明"知名品牌+双层设计/可折叠旅行款"路径在本类目同样能获得远高于其销量占比的销售额占比，是可复制的差异化定位方向。</li>
+          </ol>
+        </div>
+        <div>
+          <h4>🔴 主要风险与挑战</h4>
+          <ol>
+            <li><b>品控与结构件耐久性问题反复出现</b>：多条评论涉及"支架断裂""螺丝孔位对不上""吸盘首次使用即脱落"等做工投诉（如B0GGBJF4HN"the main bracket underneath broke...There was no extra force applied"、B0H2W1LDS8"The screws provided were not the ones in the instructions"），是退货率和差评率的主要来源。</li>
+            <li><b>评论沉淀速度与销量不匹配</b>：多款新品评分数仅个位数至数十条却已有数百件/月销量（第9节），意味着口碑数据滞后于实际销售，选品/竞品分析时不能只看评论数下判断。</li>
+            <li><b>安全担忧类差评影响信任</b>：如B0D8W5XFQ8"It needs a mat inside. If a baby falls inside they will hurt their head"、B0FR4V816G"Poor Lock Design, Unsafe"等反映部分产品在结构安全设计上仍有改进空间，需严格对标 ASTM F406/CPSC 等安规测试。</li>
+            <li><b>评论/评分护城河比其他母婴类目更高</b>：第4节显示500+评论商品占据83.75%销量，新进入者若无品牌背书或强力内容运营，起量周期可能长于其他细分类目。</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14. 成本推算与新手入局测算 -->
+  <section>
+    <div class="section-title"><div class="idx">14</div><h2>成本推算与新手入局测算</h2></div>
+
+    <div class="card">
+      <div class="small-title">可变动利润测算器（对标卖家精灵后台"利润测算"模板，参数均可自行修改，实时重新计算）</div>
+      <p class="pdf-snapshot-note note">⚠️ 以下为导出PDF时的固定数值快照（打印当下页面上填的数字），PDF中不可再编辑或重新计算；如需修改参数重新测算，请在浏览器中打开原始HTML文件。</p>
+      <div class="calc-flex">
+        <div class="calc-grid">
+          <div>
+            <h4>① 商品收入</h4>
+            <div class="calc-field"><span>单件售价</span><input type="number" id="pcPrice" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <div class="calc-field"><span>月销量</span><input type="number" id="pcUnits" step="1" placeholder="0" oninput="pcCalc()"><span class="unit">件</span></div>
+            <h4>② 产品成本</h4>
+            <div class="calc-field"><span>采购成本/件</span><input type="number" id="pcCogs" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <div class="calc-field"><span>头程运费/件</span><input type="number" id="pcFreight" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <div class="calc-field"><span>入仓/清关等其他物流/件</span><input type="number" id="pcOtherLog" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <h4>③ 关税与进口杂费</h4>
+            <div class="calc-field"><span>综合关税税率(原产国，默认中国大陆)</span><input type="number" id="pcTariffRate" step="0.1" value="35" oninput="pcCalc()"><span class="unit">%</span></div>
+            <div class="calc-field"><span>MPF+HMF等报关杂费费率</span><input type="number" id="pcImportFees" step="0.01" value="0.47" oninput="pcCalc()"><span class="unit">%</span></div>
+          </div>
+          <div>
+            <h4>④ 亚马逊平台费用</h4>
+            <div class="calc-field"><span>平台佣金率</span><input type="number" id="pcReferralRate" step="0.1" value="15" oninput="pcCalc()"><span class="unit">%</span></div>
+            <div class="calc-field"><span>最低佣金</span><input type="number" id="pcReferralMin" step="0.01" value="0.30" oninput="pcCalc()"><span class="unit">$</span></div>
+            <div class="calc-field"><span>FBA配送费/件</span><input type="number" id="pcFba" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <div class="calc-field"><span>月仓储费/件</span><input type="number" id="pcStorage" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <h4>⑤ 营销与售后成本</h4>
+            <div class="calc-field"><span>广告费占销售额比例(ACOS)</span><input type="number" id="pcAcos" step="0.1" value="15" oninput="pcCalc()"><span class="unit">%</span></div>
+            <div class="calc-field"><span>其他营销成本/件(测评/红人/Deals)</span><input type="number" id="pcOtherMkt" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <div class="calc-field"><span>退货率</span><input type="number" id="pcReturnRate" step="0.1" value="5" oninput="pcCalc()"><span class="unit">%</span></div>
+            <div class="calc-field"><span>退货处理手续费/件</span><input type="number" id="pcRefundFee" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+          </div>
+        </div>
+        <div style="flex:1 1 240px;min-width:220px;">
+          <div class="chart-box" style="height:240px;"><canvas id="pcChart"></canvas></div>
+          <button class="calc-reset" onclick="pcReset()">重置为空白模板</button>
+          <div class="note" id="pcSaveStatus" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <div class="stat-grid" id="pcStats"></div>
+      <p class="note">测算口径：净利润 ＝ 总收入 － 退货冲减收入 － 平台佣金 － FBA费用 － 月仓储费 － 产品成本(含头程/其他物流) － 关税 － 报关杂费 － 广告费 － 其他营销成本 － 退货处理手续费；平台佣金＝max(售价×佣金率, 最低佣金)；<b>关税计税基础＝(采购成本+头程运费)/件</b>，关税＝计税基础×综合关税税率，报关杂费(MPF+HMF)＝计税基础×杂费费率；退货冲减收入＝总收入×退货率（简化处理，未拆分退货订单的佣金退还，实务中会有部分佣金退还给卖家）；ROI＝净利润÷产品成本总投入(含关税)。<b>分类假设：</b>婴儿游戏床（Playards）多为金属/塑料框架+纺织网面组合结构，通常归类于 HTS 9403（家具类，游戏围栏/游戏床多落入9403.20金属家具或9403.70塑料家具子目）而非玩具类目，具体归类需以商品主体材质（金属/塑料/木质占比）判定。综合关税税率默认沿用本团队既往母婴家具类报告一致的 <b>35%</b> 基线假设（对应对华一般 MFN基础税率 + 2026年当前 Section 122对等关税 + Section 301附加关税 的合计口径估算），MPF+HMF杂费费率默认 <b>0.47%</b>（约0.3464%商品处理费+0.125%港口维护费）；<b>但游戏床类HTS子目与床边婴儿床、婴儿弹跳椅等相邻品类的税则并不完全相同</b>，本报告未能在本次核实周期内逐一核对婴儿游戏床的准确HTS子目及适用税率，35%仅为延续同团队既往测算口径的保守估算基线，实际税率可能因框架材质（金属/塑料占比）、纺织面料成分等因素而不同。以上为通用测算模板，佣金率/ACOS/退货率已预填Baby Products类目常见经验值，<b>关税税率、生效日期及具体HTS归类请务必以美国海关(CBP)官方数据及专业报关行核实后的税率为准</b>，不构成财务或法律建议。</p>
+    </div>
+  </section>
+
+  <!-- 15. 总结建议 -->
+  <section>
+    <div class="section-title"><div class="idx">15</div><h2>总结与建议</h2></div>
+    <div class="card">
+      <p>Baby Playards（婴儿游戏床）是一个 <b>价格带跨度大（$18-$270+）、销量高度集中在低价爆款、月销规模约17.7万件/$1,509万美元、头部三强占比明确但尚未垄断</b> 的细分类目。与部分被极度分散长尾品牌占据的母婴品类不同，本类目已形成 Dream On Me（低价走量）、Pamo babe（多SKU全价格带覆盖）、Graco（品牌溢价）三家相对领先的品牌，合计占约42%销量/41.5%销售额；但仍有过半市场分散在长尾47个品牌手中，格局尚未固化。同时 Graco 新品(B0GD8Y27PV)以$219.99高价迅速冲上新品榜首的现象证明，知名品牌信任溢价在本类目仍具极强的号召力，与"低价走量"路径同样可行。</p>
+      <p>建议新进入者优先考虑：① <b>把"尺寸标注准确性""折叠收纳体验""结构件耐久性"作为产品设计的核心差异化点</b>——这三项是本次评论核实中出现频率最高、且跨品牌/跨价格带反复出现的体验与做工痛点（详见第10/11/13节真实评论摘录），谁能率先系统性解决可建立信任壁垒；② 定价上可优先卡位 <b>$0-100</b> 主流走量带（贡献超七成销量），或对标Graco/Guava Family走知名品牌/高端结构化路线，避免在$200以上高端段与已验证的品牌正面竞争（该价格带商品数与销量占比均最低，见第3节）；③ 重视评论/评分积累周期——本类目评论护城河比多数母婴品类更高（500+评论商品占83.75%销量，见第4节），新品应尽早通过VINE/早期评论计划等合规方式积累评论基础，单纯依赖广告冲量难以快速突破；④ 关注 Google 搜索趋势在2026年3-6月出现的热度跃升信号（第2节），但7月数据骤降大概率是当月未采集完整所致，建议以完整月度数据持续跟踪验证需求是否真实增长，而非直接作为投放预算决策依据。</p>
+      <p class="note">数据来源与方法论说明：产品明细数据取自 SellerSprite MCP 站内数据（2026年6月类目样本），并于2026年7月对 Top50/新品榜Top20 共66个ASIN的月销量进行了独立重新核实（对照 asin_sales_trend 接口的6月实际值），核实后按验证销量重新排序生成第8/9节表格；<b>月销售额为估算值</b>——由于核实批次未单独重新采集逐月真实成交额，报告中的销售额＝核实后的月销量 × 该ASIN原始快照记录的平均单价，这是一个近似值而非逐月精确对账数据，第12节广告花费测算等下游数字均基于此估算销售额展开，请知悉此项方法论局限。第10/11节买家评价均为真实评论原文逐字摘录（40个核心ASIN中27个采集到可摘录的1-3星文字评论，其余13个ASIN评论区暂无可摘录文字样本，已在对应卡片中注明原因，不做编造或替代摘录）。Google Trends数据来自本次报告生成当下对关键词"baby playard"的一次性实时抓取（近5年月度数据）。以上销量/销售额为基于站内算法与本次核实流程的估算值，非卖家后台真实数据，仅供选品决策参考，不构成投资或采购建议。</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>Baby Playards 婴儿游戏床类目调研报告 · 数据截至 2026-07-11 · 数据来源：SellerSprite（2026年6月样本，2026年7月核实）/ Google Trends</footer>
+
+<script>
+const top20 = [{r:1,img:"https://images-na.ssl-images-amazon.com/images/I/71YdsncxTFL._AC_US200_.jpg",asin:"B0BVLX15R2",brand:"Hiaksedt",units:15856,revenue:633922.9,price:39.98,ratings:4669,rating:4.5,date:"2023-03-24",days:1205},{r:2,img:"https://images-na.ssl-images-amazon.com/images/I/81Nae+oIBZL._AC_US200_.jpg",asin:"B07WPW1YYC",brand:"Dream On Me",units:13739,revenue:536370.59,price:39.04,ratings:11515,rating:4.5,date:"2019-08-28",days:2509},{r:3,img:"https://images-na.ssl-images-amazon.com/images/I/81sSJhCojNL._AC_US200_.jpg",asin:"B09MWHG3ZT",brand:"Graco",units:11096,revenue:887569.0,price:79.99,ratings:2724,rating:4.8,date:"2021-12-24",days:1660},{r:4,img:"https://images-na.ssl-images-amazon.com/images/I/71I5iaHPHEL._AC_US200_.jpg",asin:"B0CKTLQ791",brand:"Jaobeem",units:6181,revenue:308926.37,price:49.98,ratings:1263,rating:4.5,date:"2023-12-07",days:947},{r:5,img:"https://images-na.ssl-images-amazon.com/images/I/81jzxXpK5dL._AC_US200_.jpg",asin:"B0C5QXPFKB",brand:"Fshibila",units:6154,revenue:307453.82,price:49.96,ratings:3430,rating:4.4,date:"2023-08-01",days:1075},{r:6,img:"https://images-na.ssl-images-amazon.com/images/I/819qxqjmBqL._AC_US200_.jpg",asin:"B09ZDQ3C2Y",brand:"Pamo babe",units:6124,revenue:336758.79,price:54.99,ratings:6371,rating:4.6,date:"2022-05-16",days:1517},{r:7,img:"https://images-na.ssl-images-amazon.com/images/I/71uwtcD49IL._AC_US200_.jpg",asin:"B0CH2TZPL8",brand:"XVISHX",units:5630,revenue:224918.5,price:39.95,ratings:2509,rating:4.5,date:"2023-10-25",days:990},{r:8,img:"https://images-na.ssl-images-amazon.com/images/I/71yHhq5jAkL._AC_US200_.jpg",asin:"B09Z2JP78L",brand:"Fodoss",units:5437,revenue:217425.63,price:39.99,ratings:4488,rating:4.7,date:"2022-06-26",days:1476},{r:9,img:"https://images-na.ssl-images-amazon.com/images/I/81V9AnXe5cL._AC_US200_.jpg",asin:"B08BT16TH5",brand:"Dream On Me",units:5067,revenue:248283.0,price:49.0,ratings:10452,rating:4.5,date:"2020-07-10",days:2192},{r:10,img:"https://images-na.ssl-images-amazon.com/images/I/81ZrNiKDgOL._AC_US200_.jpg",asin:"B0GD8Y27PV",brand:"Graco",units:5002,revenue:1100389.99,price:219.99,ratings:5797,rating:4.8,date:"2026-02-06",days:155},{r:11,img:"https://images-na.ssl-images-amazon.com/images/I/81+pa+rUazL._AC_US200_.jpg",asin:"B07964SFW4",brand:"Baby Trend",units:4652,revenue:372113.48,price:79.99,ratings:11747,rating:4.7,date:"2018-01-24",days:3090},{r:12,img:"https://images-na.ssl-images-amazon.com/images/I/81bu3anIXsL._AC_US200_.jpg",asin:"B0BHYYP48V",brand:"Dream On Me",units:4641,revenue:239011.5,price:51.5,ratings:1970,rating:4.5,date:"2022-10-15",days:1365},{r:13,img:"https://images-na.ssl-images-amazon.com/images/I/91F0mGgNUEL._AC_US200_.jpg",asin:"B08CMPTJ2S",brand:"Pamo babe",units:3679,revenue:270369.7,price:73.49,ratings:2976,rating:4.6,date:"2021-03-11",days:1948},{r:14,img:"https://images-na.ssl-images-amazon.com/images/I/71bX28gjFSL._AC_US200_.jpg",asin:"B0CKT7W65H",brand:"Jaobeem",units:2865,revenue:143135.39,price:49.96,ratings:1292,rating:4.3,date:"2023-12-09",days:945},{r:15,img:"https://images-na.ssl-images-amazon.com/images/I/71NEpug9YaL._AC_US200_.jpg",asin:"B09MWJB3LF",brand:"Graco",units:2481,revenue:161240.19,price:64.99,ratings:17081,rating:4.8,date:"2021-12-24",days:1660},{r:16,img:"https://images-na.ssl-images-amazon.com/images/I/71Q-EK2s9UL._AC_US200_.jpg",asin:"B0FBRND77P",brand:"UANLAUO",units:2310,revenue:92376.91,price:39.99,ratings:1345,rating:4.6,date:"2025-08-11",days:334},{r:17,img:"https://images-na.ssl-images-amazon.com/images/I/81rY04g4NDL._AC_US200_.jpg",asin:"B09Y8VGQPN",brand:"Dripex",units:2238,revenue:89497.62,price:39.99,ratings:1161,rating:4.6,date:"2022-05-23",days:1510},{r:18,img:"https://images-na.ssl-images-amazon.com/images/I/81JBB7UPhVL._AC_US200_.jpg",asin:"B0BS72HZXW",brand:"Graco",units:2108,revenue:202346.92,price:95.99,ratings:1076,rating:4.7,date:"2023-01-24",days:1264},{r:19,img:"https://images-na.ssl-images-amazon.com/images/I/81bM4pzmytL._AC_US200_.jpg",asin:"B0BMFQFZSH",brand:"Pamo babe",units:1986,revenue:250216.14,price:125.99,ratings:2892,rating:4.7,date:"2022-11-18",days:1331},{r:20,img:"https://images-na.ssl-images-amazon.com/images/I/71ytDrR-IqL._AC_US200_.jpg",asin:"B0D8W5XFQ8",brand:"Funsland",units:1971,revenue:130066.28,price:65.99,ratings:373,rating:4.8,date:"2024-07-23",days:718},{r:21,img:"https://images-na.ssl-images-amazon.com/images/I/81yNoLm09KL._AC_US200_.jpg",asin:"B0CC72QCCY",brand:"Orian",units:1969,revenue:98430.32,price:49.99,ratings:1706,rating:4.4,date:"2023-07-20",days:1087},{r:22,img:"https://images-na.ssl-images-amazon.com/images/I/71vmg1h0kyL._AC_US200_.jpg",asin:"B0GGBJF4HN",brand:"Pamo babe",units:1905,revenue:323830.96,price:169.99,ratings:565,rating:4.7,date:"2026-01-28",days:164},{r:23,img:"https://images-na.ssl-images-amazon.com/images/I/91xpgax1l5L._AC_US200_.jpg",asin:"B07NX2VJF9",brand:"Baby Delight",units:1901,revenue:113869.91,price:59.9,ratings:1278,rating:4.7,date:"2019-02-20",days:2698},{r:24,img:"https://images-na.ssl-images-amazon.com/images/I/91H2PBkZELL._AC_US200_.jpg",asin:"B00AKKDSNG",brand:"Guava Family",units:1827,revenue:456658.62,price:249.95,ratings:2755,rating:4.7,date:"2013-01-22",days:4918},{r:25,img:"https://images-na.ssl-images-amazon.com/images/I/71ZXQkLhugL._AC_US200_.jpg",asin:"B0FXKJG1SC",brand:"Grobeybees",units:1814,revenue:145101.85,price:79.99,ratings:113,rating:4.8,date:"2025-12-22",days:201},{r:26,img:"https://images-na.ssl-images-amazon.com/images/I/61GbAov4YtL._AC_US200_.jpg",asin:"B0CJXRGGNT",brand:"Obee Odee",units:1802,revenue:342361.97,price:189.99,ratings:929,rating:4.7,date:"2023-11-17",days:967},{r:27,img:"https://images-na.ssl-images-amazon.com/images/I/71mfIOkZMvL._AC_US200_.jpg",asin:"B0DJBN95TL",brand:"Ulnxiy",units:1780,revenue:329282.21,price:184.99,ratings:713,rating:4.2,date:"2024-11-04",days:614},{r:28,img:"https://images-na.ssl-images-amazon.com/images/I/71Aa2yecMpL._AC_US200_.jpg",asin:"B0DBYN1KSK",brand:"XVISHX",units:1647,revenue:72451.53,price:43.99,ratings:1752,rating:4.2,date:"2024-09-15",days:664},{r:29,img:"https://images-na.ssl-images-amazon.com/images/I/71X9Z9RyISL._AC_US200_.jpg",asin:"B0D7MXJGKR",brand:"POP 'N GO PLAYPEN",units:1634,revenue:228743.66,price:139.99,ratings:4106,rating:4.7,date:"2024-10-31",days:618},{r:30,img:"https://images-na.ssl-images-amazon.com/images/I/61OcfivB5sL._AC_US200_.jpg",asin:"B0CCMMPLV4",brand:"Bend River",units:1609,revenue:120562.37,price:74.93,ratings:1592,rating:4.5,date:"2023-08-16",days:1060},{r:31,img:"https://images-na.ssl-images-amazon.com/images/I/7184FaR1BWL._AC_US200_.jpg",asin:"B0FBRDZM5Y",brand:"SPRX",units:1426,revenue:128325.74,price:89.99,ratings:254,rating:4.3,date:"2025-09-28",days:286},{r:32,img:"https://images-na.ssl-images-amazon.com/images/I/81WCtCDbhUL._AC_US200_.jpg",asin:"B0DBV5W2B1",brand:"ICAREWAY",units:1371,revenue:117878.59,price:85.98,ratings:761,rating:4.5,date:"2024-08-09",days:701},{r:33,img:"https://images-na.ssl-images-amazon.com/images/I/71YJumVEX4L._AC_US200_.jpg",asin:"B0DW8L1V3W",brand:"YZNVCG",units:1370,revenue:227406.3,price:165.99,ratings:263,rating:4.3,date:"2025-03-12",days:486},{r:34,img:"https://images-na.ssl-images-amazon.com/images/I/71jxv9ozuCL._AC_US200_.jpg",asin:"B0FNRHZLG9",brand:"Cbcvvaer",units:1370,revenue:136972.6,price:99.98,ratings:172,rating:4.6,date:"2025-11-05",days:248},{r:35,img:"https://images-na.ssl-images-amazon.com/images/I/71oTPsEiZuL._AC_US200_.jpg",asin:"B0FY1HYD5D",brand:"Pamo babe",units:1368,revenue:172354.32,price:125.99,ratings:8411,rating:4.7,date:"2025-12-08",days:215},{r:36,img:"https://images-na.ssl-images-amazon.com/images/I/81p15IBYBpL._AC_US200_.jpg",asin:"B0FLFBB7HJ",brand:"Newton Baby",units:1345,revenue:268986.56,price:199.99,ratings:65,rating:4.8,date:"2025-09-10",days:304},{r:37,img:"https://images-na.ssl-images-amazon.com/images/I/71nSq-tNipL._AC_US200_.jpg",asin:"B0GGB6WK92",brand:"Pamo babe",units:1340,revenue:241186.6,price:179.99,ratings:486,rating:4.6,date:"2026-03-26",days:107},{r:38,img:"https://images-na.ssl-images-amazon.com/images/I/71xcrjzewHL._AC_US200_.jpg",asin:"B0D6VKPCZ1",brand:"HUTOCADA",units:1339,revenue:267786.62,price:199.99,ratings:251,rating:4.6,date:"2024-06-19",days:752},{r:39,img:"https://images-na.ssl-images-amazon.com/images/I/7125qwtbfRL._AC_US200_.jpg",asin:"B0CP2XJDV4",brand:"ZETY BABY",units:1336,revenue:267133.19,price:199.95,ratings:536,rating:4.5,date:"2023-12-01",days:953},{r:40,img:"https://images-na.ssl-images-amazon.com/images/I/71oTPsEiZuL._AC_US200_.jpg",asin:"B0CZKZM7PW",brand:"Pamo babe",units:1334,revenue:173406.67,price:129.99,ratings:8458,rating:4.7,date:"2024-04-04",days:828},{r:41,img:"https://images-na.ssl-images-amazon.com/images/I/81b4BmdXMXL._AC_US200_.jpg",asin:"B0DB66HWZZ",brand:"Comfy Cubs",units:1293,revenue:284447.08,price:219.99,ratings:616,rating:4.4,date:"2024-10-02",days:647},{r:42,img:"https://images-na.ssl-images-amazon.com/images/I/81EcAC4HnyL._AC_US200_.jpg",asin:"B0DJS8FCBQ",brand:"Sweeby",units:1286,revenue:218607.14,price:169.99,ratings:227,rating:4.6,date:"2024-11-23",days:595},{r:43,img:"https://images-na.ssl-images-amazon.com/images/I/812LlDEXGeL._AC_US200_.jpg",asin:"B0F2173RVR",brand:"omzer",units:1235,revenue:148187.65,price:119.99,ratings:213,rating:4.8,date:"2025-06-26",days:380},{r:44,img:"https://images-na.ssl-images-amazon.com/images/I/71NmTugRvQL._AC_US200_.jpg",asin:"B0DQ72XT66",brand:"TinyGlow",units:1212,revenue:193907.88,price:159.99,ratings:320,rating:4.6,date:"2025-04-02",days:465},{r:45,img:"https://images-na.ssl-images-amazon.com/images/I/71nSq-tNipL._AC_US200_.jpg",asin:"B0BPWPFVVC",brand:"Pamo babe",units:1152,revenue:218868.5,price:189.99,ratings:454,rating:4.6,date:"2023-03-08",days:1221},{r:46,img:"https://images-na.ssl-images-amazon.com/images/I/71f7IzGdG3L._AC_US200_.jpg",asin:"B07R5CF3BM",brand:"Baby Trend",units:1126,revenue:168888.75,price:149.99,ratings:8145,rating:4.8,date:"2021-11-27",days:1687},{r:47,img:"https://images-na.ssl-images-amazon.com/images/I/716OAqSlgKL._AC_US200_.jpg",asin:"B0G5Q5BPK8",brand:"Cbcvvaer",units:1079,revenue:121916.21,price:112.99,ratings:62,rating:4.7,date:"2026-01-09",days:183},{r:48,img:"https://images-na.ssl-images-amazon.com/images/I/71-YqMsa3uL._AC_US200_.jpg",asin:"B0BCVRHFX8",brand:"ZEEBABA",units:1036,revenue:51779.28,price:49.98,ratings:1785,rating:4.6,date:"2022-10-20",days:1360},{r:49,img:"https://images-na.ssl-images-amazon.com/images/I/71HB83SBQ2L._AC_US200_.jpg",asin:"B0GVZV98TQ",brand:"Boppy",units:880,revenue:83591.2,price:94.99,ratings:22,rating:5.0,date:"2026-04-08",days:94},{r:50,img:"https://images-na.ssl-images-amazon.com/images/I/8139DHNc3sL._AC_US200_.jpg",asin:"B0CZ3RK142",brand:"Pamo babe",units:866,revenue:109107.34,price:125.99,ratings:8410,rating:4.7,date:"2024-05-02",days:800}];
+
+const salesTrendData = {"B00AKKDSNG":[["24/05",3013],["24/06",2655],["24/07",3172],["24/08",2303],["24/09",2141],["24/10",2198],["24/11",1833],["24/12",1654],["25/01",1585],["25/02",1252],["25/03",1629],["25/04",1365],["25/05",1602],["25/06",1730],["25/07",1916],["25/08",1755],["25/09",1369],["25/10",1416],["25/11",1281],["25/12",1286],["26/01",1024],["26/02",1061],["26/03",1045],["26/04",1327],["26/05",1691],["26/06",1827],["26/07",1333]],"B07964SFW4":[["24/05",3570],["24/06",0],["24/07",222],["24/08",5417],["24/09",5246],["24/10",4702],["24/11",4472],["24/12",3776],["25/01",4379],["25/02",4670],["25/03",4785],["25/04",3661],["25/05",3074],["25/06",2156],["25/07",1889],["25/08",2393],["25/09",3263],["25/10",4131],["25/11",2265],["25/12",2004],["26/01",3301],["26/02",6203],["26/03",5231],["26/04",4869],["26/05",4466],["26/06",4652],["26/07",3813]],"B07NX2VJF9":[["24/05",722],["24/06",732],["24/07",607],["24/08",413],["24/09",415],["24/10",308],["24/11",213],["24/12",193],["25/01",231],["25/02",369],["25/03",733],["25/04",962],["25/05",1316],["25/06",840],["25/07",711],["25/08",416],["25/09",422],["25/10",389],["25/11",284],["25/12",197],["26/01",303],["26/02",380],["26/03",840],["26/04",804],["26/05",1365],["26/06",1901],["26/07",713]],"B07R5CF3BM":[["24/05",0],["24/06",1806],["24/07",3213],["24/08",1722],["24/09",1621],["24/10",213],["24/11",1669],["24/12",2823],["25/01",4709],["25/02",5770],["25/03",5252],["25/04",6441],["25/05",4885],["25/06",2834],["25/07",1992],["25/08",1434],["25/09",2278],["25/10",2552],["25/11",2146],["25/12",492],["26/01",798],["26/02",1166],["26/03",870],["26/04",997],["26/05",896],["26/06",1126],["26/07",651]],"B07WPW1YYC":[["24/05",328],["24/06",611],["24/07",19],["24/08",499],["24/09",1215],["24/10",2167],["24/11",3336],["24/12",3733],["25/01",4896],["25/02",8141],["25/03",7952],["25/04",8586],["25/05",6889],["25/06",5318],["25/07",4810],["25/08",4293],["25/09",5584],["25/10",7449],["25/11",11005],["25/12",7002],["26/01",5887],["26/02",5167],["26/03",2542],["26/04",2803],["26/05",7754],["26/06",13739],["26/07",17794]],"B08BT16TH5":[["24/05",1099],["24/06",1187],["24/07",563],["24/08",837],["24/09",2637],["24/10",4368],["24/11",4316],["24/12",3988],["25/01",2228],["25/02",1604],["25/03",1409],["25/04",2788],["25/05",6682],["25/06",8204],["25/07",7285],["25/08",4204],["25/09",5044],["25/10",4926],["25/11",1768],["25/12",2965],["26/01",1826],["26/02",2856],["26/03",8823],["26/04",8786],["26/05",7851],["26/06",5067],["26/07",4061]],"B08CMPTJ2S":[["24/05",1730],["24/06",2429],["24/07",4226],["24/08",2388],["24/09",2520],["24/10",4153],["24/11",3459],["24/12",1673],["25/01",2790],["25/02",3412],["25/03",3743],["25/04",2815],["25/05",1855],["25/06",2070],["25/07",4034],["25/08",3382],["25/09",3678],["25/10",4850],["25/11",5512],["25/12",5054],["26/01",4385],["26/02",4736],["26/03",5987],["26/04",5137],["26/05",4468],["26/06",3679],["26/07",2356]],"B09MWHG3ZT":[["24/05",18065],["24/06",18046],["24/07",24635],["24/08",21885],["24/09",15139],["24/10",4297],["24/11",16700],["24/12",15963],["25/01",9512],["25/02",9589],["25/03",14876],["25/04",18081],["25/05",17431],["25/06",14655],["25/07",14500],["25/08",10057],["25/09",10208],["25/10",10717],["25/11",13584],["25/12",7769],["26/01",8664],["26/02",10255],["26/03",8402],["26/04",4436],["26/05",6918],["26/06",11096],["26/07",10695]],"B09MWJB3LF":[["24/05",18065],["24/06",18046],["24/07",24635],["24/08",21629],["24/09",15139],["24/10",4297],["24/11",16700],["24/12",15963],["25/01",9512],["25/02",9589],["25/03",14876],["25/04",18081],["25/05",8185],["25/06",1925],["25/07",2238],["25/08",1718],["25/09",1666],["25/10",1585],["25/11",8036],["25/12",2393],["26/01",2430],["26/02",2968],["26/03",2131],["26/04",1451],["26/05",1758],["26/06",2481],["26/07",1395]],"B09Y8VGQPN":[["24/05",0],["24/06",18],["24/07",5685],["24/08",3503],["24/09",2834],["24/10",4230],["24/11",4084],["24/12",2889],["25/01",2185],["25/02",7],["25/03",2577],["25/04",1431],["25/05",1422],["25/06",1404],["25/07",1077],["25/08",1857],["25/09",1635],["25/10",2130],["25/11",1936],["25/12",1708],["26/01",1358],["26/02",1294],["26/03",1451],["26/04",1554],["26/05",1413],["26/06",2238],["26/07",806]],"B09Z2JP78L":[["24/05",0],["24/06",2140],["24/07",11433],["24/08",9059],["24/09",13229],["24/10",9594],["24/11",8748],["24/12",6828],["25/01",4294],["25/02",3798],["25/03",5497],["25/04",5634],["25/05",6126],["25/06",6869],["25/07",10198],["25/08",8558],["25/09",5479],["25/10",6480],["25/11",7518],["25/12",8501],["26/01",6509],["26/02",6587],["26/03",8446],["26/04",5338],["26/05",5107],["26/06",5437],["26/07",2883]],"B09ZDQ3C2Y":[["24/05",6341],["24/06",7096],["24/07",5378],["24/08",6158],["24/09",5343],["24/10",9039],["24/11",7367],["24/12",5913],["25/01",6761],["25/02",6494],["25/03",7116],["25/04",5963],["25/05",4901],["25/06",5371],["25/07",6467],["25/08",4846],["25/09",5679],["25/10",5725],["25/11",8508],["25/12",5854],["26/01",5041],["26/02",5611],["26/03",7449],["26/04",6169],["26/05",5786],["26/06",6124],["26/07",3193]],"B0BCVRHFX8":[["24/05",1942],["24/06",2172],["24/07",2773],["24/08",4348],["24/09",4271],["24/10",2440],["24/11",5916],["24/12",2589],["25/01",3029],["25/02",2470],["25/03",3115],["25/04",2934],["25/05",2790],["25/06",2482],["25/07",3831],["25/08",2469],["25/09",1973],["25/10",1745],["25/11",1893],["25/12",1413],["26/01",1237],["26/02",1224],["26/03",1881],["26/04",1177],["26/05",1070],["26/06",1036],["26/07",899]],"B0BHYYP48V":[["24/05",1384],["24/06",1337],["24/07",1383],["24/08",1592],["24/09",3243],["24/10",3184],["24/11",2969],["24/12",2147],["25/01",1953],["25/02",1721],["25/03",1673],["25/04",1989],["25/05",2582],["25/06",4187],["25/07",5753],["25/08",5540],["25/09",2542],["25/10",1485],["25/11",759],["25/12",763],["26/01",2174],["26/02",4540],["26/03",3640],["26/04",3601],["26/05",3551],["26/06",4641],["26/07",2728]],"B0BMFQFZSH":[["24/05",3268],["24/06",0],["24/07",0],["24/08",3392],["24/09",3224],["24/10",6397],["24/11",5255],["24/12",3170],["25/01",4547],["25/02",4512],["25/03",4888],["25/04",2913],["25/05",2911],["25/06",3240],["25/07",4764],["25/08",3460],["25/09",2864],["25/10",3681],["25/11",3916],["25/12",3115],["26/01",2883],["26/02",2264],["26/03",3632],["26/04",3121],["26/05",3234],["26/06",1986],["26/07",2108]],"B0BPWPFVVC":[["24/05",804],["24/06",0],["24/07",0],["24/08",1268],["24/09",1259],["24/10",1590],["24/11",1101],["24/12",980],["25/01",1031],["25/02",896],["25/03",1244],["25/04",985],["25/05",952],["25/06",1007],["25/07",1519],["25/08",921],["25/09",793],["25/10",984],["25/11",1104],["25/12",565],["26/01",457],["26/02",168],["26/03",75],["26/04",73],["26/05",539],["26/06",1152],["26/07",713]],"B0BS72HZXW":[["24/05",18065],["24/06",18046],["24/07",24644],["24/08",21262],["24/09",15139],["24/10",4374],["24/11",16543],["24/12",15963],["25/01",9498],["25/02",9589],["25/03",15390],["25/04",18081],["25/05",17431],["25/06",14721],["25/07",15009],["25/08",10125],["25/09",10208],["25/10",10717],["25/11",9908],["25/12",3547],["26/01",4470],["26/02",2929],["26/03",2814],["26/04",2896],["26/05",2010],["26/06",2108],["26/07",930]],"B0BVLX15R2":[["24/05",0],["24/06",0],["24/07",0],["24/08",8177],["24/09",6557],["24/10",7991],["24/11",7934],["24/12",12304],["25/01",12232],["25/02",15615],["25/03",15532],["25/04",10148],["25/05",12819],["25/06",9379],["25/07",3211],["25/08",4852],["25/09",7701],["25/10",11263],["25/11",10012],["25/12",10865],["26/01",11364],["26/02",12524],["26/03",13432],["26/04",14168],["26/05",14282],["26/06",15856],["26/07",14074]],"B0C5QXPFKB":[["24/05",0],["24/06",5447],["24/07",5731],["24/08",5543],["24/09",5646],["24/10",5679],["24/11",6190],["24/12",6612],["25/01",5391],["25/02",5784],["25/03",7181],["25/04",3154],["25/05",4014],["25/06",4410],["25/07",7423],["25/08",6671],["25/09",8394],["25/10",6825],["25/11",7479],["25/12",6065],["26/01",5444],["26/02",6356],["26/03",6301],["26/04",6116],["26/05",6511],["26/06",6154],["26/07",5580]],"B0CC72QCCY":[["24/05",406],["24/06",399],["24/07",711],["24/08",410],["24/09",1197],["24/10",965],["24/11",946],["24/12",2785],["25/01",1498],["25/02",2093],["25/03",2059],["25/04",1472],["25/05",1569],["25/06",831],["25/07",854],["25/08",2245],["25/09",1192],["25/10",1716],["25/11",2514],["25/12",5748],["26/01",2962],["26/02",4800],["26/03",3808],["26/04",2425],["26/05",1959],["26/06",1969],["26/07",1116]],"B0CCMMPLV4":[["24/05",1481],["24/06",2213],["24/07",1847],["24/08",813],["24/09",320],["24/10",121],["24/11",99],["24/12",70],["25/01",88],["25/02",120],["25/03",296],["25/04",767],["25/05",1824],["25/06",1374],["25/07",1402],["25/08",632],["25/09",524],["25/10",507],["25/11",280],["25/12",146],["26/01",96],["26/02",109],["26/03",801],["26/04",861],["26/05",1327],["26/06",1609],["26/07",651]],"B0CH2TZPL8":[["24/05",2478],["24/06",2623],["24/07",2976],["24/08",395],["24/09",2023],["24/10",1955],["24/11",1311],["24/12",1662],["25/01",2161],["25/02",1827],["25/03",27],["25/04",2040],["25/05",1556],["25/06",2020],["25/07",4461],["25/08",9522],["25/09",7136],["25/10",7485],["25/11",9703],["25/12",3434],["26/01",3961],["26/02",5787],["26/03",6433],["26/04",5647],["26/05",5714],["26/06",5630],["26/07",7192]],"B0CJXRGGNT":[["24/07",120],["24/11",957],["24/12",951],["25/01",389],["25/02",1123],["25/03",1286],["25/04",1423],["25/05",1485],["25/06",1326],["25/07",1859],["25/08",1596],["25/09",1764],["25/10",1732],["25/11",1758],["25/12",1464],["26/01",1683],["26/02",1688],["26/03",1628],["26/04",1611],["26/05",1383],["26/06",1802],["26/07",899]],"B0CKT7W65H":[["24/05",2345],["24/06",0],["24/07",3467],["24/08",2363],["24/09",2219],["24/10",2108],["24/11",1923],["24/12",1693],["25/01",1771],["25/02",1627],["25/03",2586],["25/04",2239],["25/05",2685],["25/06",3187],["25/07",3111],["25/08",3255],["25/09",3280],["25/10",3014],["25/11",2771],["25/12",2092],["26/01",2490],["26/02",2152],["26/03",3095],["26/04",2776],["26/05",2596],["26/06",2865],["26/07",1705]],"B0CKTLQ791":[["24/05",0],["24/06",2608],["24/07",2523],["24/08",2044],["24/09",1955],["24/10",1775],["24/11",474],["24/12",1679],["25/01",2005],["25/02",1997],["25/03",1831],["25/04",1855],["25/05",2223],["25/06",1943],["25/07",4],["25/08",3928],["25/09",4566],["25/10",5018],["25/11",6104],["25/12",4271],["26/01",3792],["26/02",4888],["26/03",6665],["26/04",4597],["26/05",4871],["26/06",6181],["26/07",3751]],"B0CP2XJDV4":[["24/05",234],["24/06",107],["24/07",299],["24/08",706],["24/09",481],["24/10",567],["24/11",553],["24/12",580],["25/01",525],["25/02",815],["25/03",941],["25/04",1080],["25/05",1007],["25/06",1030],["25/07",1172],["25/08",995],["25/09",929],["25/10",783],["25/11",893],["25/12",1158],["26/01",1014],["26/02",1083],["26/03",1166],["26/04",1211],["26/05",182],["26/06",1336],["26/07",868]],"B0CZ3RK142":[["24/07",12],["24/08",152],["24/09",262],["24/10",416],["24/11",2129],["24/12",1022],["25/01",745],["25/02",586],["25/03",547],["25/04",624],["25/05",533],["25/06",617],["25/07",1748],["25/08",1394],["25/09",1618],["25/10",1835],["25/11",0],["25/12",1113],["26/01",773],["26/02",627],["26/03",884],["26/04",1019],["26/05",847],["26/06",866],["26/07",589]],"B0CZKZM7PW":[["24/06",7],["24/07",93],["24/08",88],["24/09",104],["24/10",122],["24/11",124],["24/12",107],["25/01",119],["25/02",68],["25/03",103],["25/04",624],["25/05",523],["25/06",613],["25/07",1772],["25/08",1394],["25/09",1618],["25/10",1835],["25/11",0],["25/12",1113],["26/01",793],["26/02",627],["26/03",884],["26/04",1019],["26/05",855],["26/06",1334],["26/07",589]],"B0D6VKPCZ1":[["24/08",159],["24/09",280],["24/10",407],["24/11",688],["24/12",395],["25/01",702],["25/02",669],["25/03",694],["25/04",882],["25/05",1014],["25/06",857],["25/07",1176],["25/08",584],["25/09",699],["25/10",976],["25/11",731],["25/12",1158],["26/01",903],["26/02",693],["26/03",816],["26/04",855],["26/05",851],["26/06",1339],["26/07",372]],"B0D7MXJGKR":[["25/01",846],["25/02",791],["25/03",211],["25/04",3753],["25/05",4330],["25/06",4302],["25/07",4148],["25/08",1610],["25/09",992],["25/10",813],["25/11",800],["25/12",845],["26/01",904],["26/02",1176],["26/03",1225],["26/04",1358],["26/05",2456],["26/06",1634],["26/07",1147]],"B0D8W5XFQ8":[["24/12",43],["25/01",55],["25/02",122],["25/03",610],["25/04",669],["25/05",898],["25/06",768],["25/07",613],["25/08",494],["25/09",242],["25/10",156],["25/11",124],["25/12",106],["26/01",100],["26/02",222],["26/03",1002],["26/04",905],["26/05",700],["26/06",1971],["26/07",775]],"B0DB66HWZZ":[["24/11",726],["24/12",747],["25/01",760],["25/02",668],["25/03",826],["25/04",661],["25/05",707],["25/06",659],["25/07",1096],["25/08",637],["25/09",624],["25/10",899],["25/11",1190],["25/12",924],["26/01",992],["26/02",1285],["26/03",1029],["26/04",807],["26/05",905],["26/06",1293],["26/07",589]],"B0DBV5W2B1":[["24/08",0],["24/09",182],["24/10",738],["24/11",0],["24/12",958],["25/01",1140],["25/02",909],["25/03",883],["25/04",841],["25/05",1190],["25/06",1156],["25/07",1278],["25/08",690],["25/09",1277],["25/10",1137],["25/11",1592],["25/12",1484],["26/01",1210],["26/02",1413],["26/03",1202],["26/04",1286],["26/05",1263],["26/06",1371],["26/07",992]],"B0DBYN1KSK":[["24/09",0],["24/10",426],["24/11",1202],["24/12",2030],["25/01",2628],["25/02",2805],["25/03",4197],["25/04",2202],["25/05",1882],["25/06",2493],["25/07",2662],["25/08",1991],["25/09",2544],["25/10",2535],["25/11",2764],["25/12",2463],["26/01",1660],["26/02",1659],["26/03",2304],["26/04",1655],["26/05",1630],["26/06",1647],["26/07",620]],"B0DJBN95TL":[["25/01",448],["25/02",0],["25/03",714],["25/04",929],["25/05",1232],["25/06",1129],["25/07",1934],["25/08",1099],["25/09",1418],["25/10",1741],["25/11",1782],["25/12",1485],["26/01",1422],["26/02",61],["26/03",801],["26/04",824],["26/05",665],["26/06",1780],["26/07",713]],"B0DJS8FCBQ":[["24/11",195],["24/12",192],["25/04",0],["25/05",380],["25/06",354],["25/07",465],["25/08",616],["25/09",376],["25/10",503],["25/11",684],["25/12",608],["26/01",446],["26/02",771],["26/03",896],["26/04",1146],["26/05",1092],["26/06",1286],["26/07",744]],"B0DQ72XT66":[["25/03",0],["25/04",208],["25/05",378],["25/06",235],["25/07",623],["25/08",426],["25/09",723],["25/10",914],["25/11",1138],["25/12",912],["26/01",998],["26/02",1095],["26/03",954],["26/04",963],["26/05",951],["26/06",1212],["26/07",620]],"B0DW8L1V3W":[["25/02",57],["25/03",121],["25/04",276],["25/05",246],["25/06",294],["25/07",612],["25/08",573],["25/09",1306],["25/10",1472],["25/11",1649],["25/12",1139],["26/01",866],["26/02",626],["26/03",1669],["26/04",968],["26/05",665],["26/06",1370],["26/07",558]],"B0F2173RVR":[["26/01",0],["26/02",510],["26/03",726],["26/04",750],["26/05",815],["26/06",1235],["26/07",558]],"B0FBRDZM5Y":[["25/10",211],["25/11",109],["25/12",805],["26/01",672],["26/02",1110],["26/03",746],["26/04",700],["26/05",932],["26/06",1426],["26/07",589]],"B0FBRND77P":[["25/08",0],["25/09",2],["25/10",258],["25/11",717],["25/12",1017],["26/01",1171],["26/02",1022],["26/03",1363],["26/04",1408],["26/05",1612],["26/06",2310],["26/07",1643]],"B0FLFBB7HJ":[["25/11",786],["25/12",644],["26/01",714],["26/02",1089],["26/03",2],["26/04",1088],["26/05",1018],["26/06",1345],["26/07",620]],"B0FNRHZLG9":[["25/10",0],["25/11",124],["25/12",0],["26/01",450],["26/02",631],["26/03",726],["26/04",1365],["26/05",1231],["26/06",1370],["26/07",1395]],"B0FR4V816G":[["26/03",17],["26/04",14],["26/05",49],["26/06",285],["26/07",186]],"B0FX3MPLGR":[["26/01",108],["26/02",403],["26/03",607],["26/04",622],["26/05",600],["26/06",640],["26/07",310]],"B0FXKJG1SC":[["25/12",0],["26/01",630],["26/02",493],["26/03",505],["26/04",1458],["26/05",1522],["26/06",1814],["26/07",589]],"B0FY1HYD5D":[["25/12",1027],["26/01",754],["26/02",627],["26/03",884],["26/04",1019],["26/05",770],["26/06",1368],["26/07",589]],"B0FZGTGJSM":[["26/01",57],["26/02",126],["26/03",185],["26/04",147],["26/05",204],["26/06",347],["26/07",124]],"B0G3PRGQ3W":[["26/01",27],["26/02",93],["26/03",200],["26/04",292],["26/05",468],["26/06",515],["26/07",217]],"B0G436SPCB":[["26/03",545],["26/04",630],["26/05",392],["26/06",675],["26/07",310]],"B0G5Q5BPK8":[["26/01",0],["26/02",10],["26/03",344],["26/04",448],["26/05",664],["26/06",1079],["26/07",527]],"B0G6KKB9M7":[["26/04",7],["26/05",153],["26/06",206],["26/07",62]],"B0G8JJLK1P":[["26/03",12],["26/04",387],["26/05",261],["26/06",207],["26/07",124]],"B0GD67TSD2":[["26/04",123],["26/05",129],["26/06",331],["26/07",124]],"B0GD8Y27PV":[["26/02",2821],["26/03",2750],["26/04",2341],["26/05",2642],["26/06",5002],["26/07",2015]],"B0GFCJ6WSJ":[["26/02",5],["26/03",19],["26/04",156],["26/05",320],["26/06",306],["26/07",124]],"B0GGB6WK92":[["26/04",100],["26/05",687],["26/06",1340],["26/07",713]],"B0GGBJF4HN":[["26/01",0],["26/02",0],["26/03",207],["26/04",814],["26/05",1390],["26/06",1905],["26/07",837]],"B0GH23JLMJ":[["26/05",60],["26/06",264],["26/07",155]],"B0GRB5MVBN":[["26/03",392],["26/04",343],["26/05",305],["26/06",299],["26/07",124]],"B0GS5FV32V":[["26/05",47],["26/06",372],["26/07",217]],"B0GVZV98TQ":[["26/04",15],["26/05",247],["26/06",880],["26/07",279]],"B0GXXTX5J2":[["26/05",6],["26/06",134],["26/07",0]],"B0GYP7PC99":[["26/05",71],["26/06",189],["26/07",62]],"B0H1GGRG8W":[["26/05",94],["26/06",241],["26/07",31]],"B0H2W1LDS8":[["26/06",6],["26/07",31]]};
+
+function sparklineSVG(points){
+  // 每根柱子都完整标注月份+销量数字；柱宽/间距仍按月份数量自适应收窄，让整段走势尽量落在可视范围内，
+  // 月份多、柱子较窄时把月份标签斜排(-60°)，避免和相邻文字重叠导致看不清
+  const padX=8,topPad=20;
+  const n = points.length;
+  const maxWidth=780; // 可视区域目标总宽度（含左右留白）
+  const gap = n>20 ? 3 : (n>12 ? 5 : 8);
+  let barW = (maxWidth - padX*2 - Math.max(0,n-1)*gap) / n;
+  barW = Math.max(10, Math.min(30, barW));
+  const rotateLabels = barW < 22; // 柱子较窄时斜排月份标签，避免文字互相压住
+  const bottomPad = rotateLabels ? 34 : 16;
+  const vals = points.map(p=>p[1]==null?0:p[1]);
+  const max = Math.max.apply(null, vals.concat([1]));
+  const w = padX*2 + n*barW + Math.max(0,n-1)*gap;
+  const h = topPad + (rotateLabels?58:40) + bottomPad - 16;
+  const chartH = h-topPad-bottomPad;
+  const baseline = h-bottomPad;
+  let bars='', vlabels='', mlabels='';
+  for(let i=0;i<n;i++){
+    const v = vals[i];
+    const bh = max>0 ? (v/max)*chartH : 0;
+    const x = padX+i*(barW+gap);
+    const y = baseline-bh;
+    const cx = x+barW/2;
+    const monthLabel = '20'+points[i][0];
+    bars += '<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+barW.toFixed(1)+'" height="'+Math.max(bh,0.5).toFixed(1)+'" rx="1.5" fill="#2f6fed"><title>'+monthLabel+': '+v.toLocaleString()+'</title></rect>';
+    vlabels += '<text x="'+cx.toFixed(1)+'" y="'+(y-3).toFixed(1)+'" font-size="7" text-anchor="middle" fill="#334155">'+v.toLocaleString()+'</text>';
+    if(rotateLabels){
+      mlabels += '<text x="'+cx.toFixed(1)+'" y="'+(baseline+11).toFixed(1)+'" font-size="7" text-anchor="end" fill="#94a3b8" transform="rotate(-60 '+cx.toFixed(1)+' '+(baseline+11).toFixed(1)+')">'+monthLabel+'</text>';
+    }else{
+      mlabels += '<text x="'+cx.toFixed(1)+'" y="'+(baseline+11).toFixed(1)+'" font-size="7.5" text-anchor="middle" fill="#94a3b8">'+monthLabel+'</text>';
+    }
+  }
+  return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'" class="trend-spark">'
+    + '<line x1="'+padX+'" y1="'+baseline+'" x2="'+(w-padX)+'" y2="'+baseline+'" stroke="#e2e8f0" stroke-width="1"/>'
+    + bars + vlabels + mlabels
+    + '</svg>';
+}
+function trendRowHTML(asin){
+  const points = salesTrendData[asin]; // 展示该ASIN全部已核实的月度销量数据（最长可到27个月），通过压缩柱宽让整段走势都落在可视范围内
+  if(!points || !points.length) return '<div class="trend-empty">暂无月度销量趋势数据（新上架或数据未覆盖）</div>';
+  return '<div class="trend-wrap"><span class="trend-label">近'+points.length+'个月销量趋势</span>'
+    + sparklineSVG(points) + '</div>';
+}
+
+const tbody = document.getElementById('top20body');
+top20.forEach(p=>{
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td class="rank">${p.r}</td>
+    <td><img class="prod-img" src="${p.img}" loading="lazy" onerror="this.style.opacity=0.2"></td>
+    <td><a href="https://www.amazon.com/dp/${p.asin}" target="_blank" rel="noopener">${p.asin}</a></td>
+    <td>${p.brand}</td>
+    <td>${p.units.toLocaleString()}</td>
+    <td>$${p.revenue.toLocaleString(undefined,{maximumFractionDigits:0})}</td>
+    <td>$${p.price}</td>
+    <td>${p.ratings.toLocaleString()}</td>
+    <td>${p.rating} ★</td>
+    <td>${p.date}</td>
+    <td>${p.days}</td>`;
+  tbody.appendChild(tr);
+  const tr2 = document.createElement('tr');
+  tr2.className = 'trend-row';
+  tr2.innerHTML = `<td colspan="11">${trendRowHTML(p.asin)}</td>`;
+  tbody.appendChild(tr2);
+});
+
+// ---- 新品榜 Top20（近6个月内上架，按月销量排序；已按独立ASIN去重，排除同款变体重复计数）----
+const newProducts10 = [{r:1,img:"https://images-na.ssl-images-amazon.com/images/I/81ZrNiKDgOL._AC_US200_.jpg",asin:"B0GD8Y27PV",brand:"Graco",units:5002,revenue:1100389.99,price:219.99,ratings:5797,rating:4.8,date:"2026-02-06",days:155},{r:2,img:"https://images-na.ssl-images-amazon.com/images/I/71vmg1h0kyL._AC_US200_.jpg",asin:"B0GGBJF4HN",brand:"Pamo babe",units:1905,revenue:323830.96,price:169.99,ratings:565,rating:4.7,date:"2026-01-28",days:164},{r:3,img:"https://images-na.ssl-images-amazon.com/images/I/71nSq-tNipL._AC_US200_.jpg",asin:"B0GGB6WK92",brand:"Pamo babe",units:1340,revenue:241186.6,price:179.99,ratings:486,rating:4.6,date:"2026-03-26",days:107},{r:4,img:"https://images-na.ssl-images-amazon.com/images/I/71HB83SBQ2L._AC_US200_.jpg",asin:"B0GVZV98TQ",brand:"Boppy",units:880,revenue:83591.2,price:94.99,ratings:22,rating:5.0,date:"2026-04-08",days:94},{r:5,img:"https://images-na.ssl-images-amazon.com/images/I/81YqpwbXo4L._AC_US200_.jpg",asin:"B0G436SPCB",brand:"Obee Odee",units:675,revenue:89768.26,price:132.99,ratings:144,rating:4.7,date:"2026-03-09",days:124},{r:6,img:"https://images-na.ssl-images-amazon.com/images/I/715oyhC8m8L._AC_US200_.jpg",asin:"B0FX3MPLGR",brand:"GAIVE",units:640,revenue:108793.61,price:169.99,ratings:92,rating:4.6,date:"2026-01-13",days:179},{r:7,img:"https://images-na.ssl-images-amazon.com/images/I/71Q03GNnfsL._AC_US200_.jpg",asin:"B0G3PRGQ3W",brand:"Tinyiota",units:515,revenue:56644.85,price:109.99,ratings:63,rating:4.6,date:"2026-01-19",days:173},{r:8,img:"https://images-na.ssl-images-amazon.com/images/I/81BjiHpPjSL._AC_US200_.jpg",asin:"B0GS5FV32V",brand:"ANGELBLISS",units:372,revenue:78116.28,price:209.99,ratings:35,rating:4.9,date:"2026-04-11",days:91},{r:9,img:"https://images-na.ssl-images-amazon.com/images/I/71gcJK7FNcL._AC_US200_.jpg",asin:"B0FZGTGJSM",brand:"Trimigo",units:347,revenue:69396.53,price:199.99,ratings:34,rating:4.8,date:"2026-01-11",days:181},{r:10,img:"https://images-na.ssl-images-amazon.com/images/I/81z4vT4riEL._AC_US200_.jpg",asin:"B0GD67TSD2",brand:"IKALIFE",units:331,revenue:89366.68,price:269.99,ratings:25,rating:4.8,date:"2026-04-19",days:83},{r:11,img:"https://images-na.ssl-images-amazon.com/images/I/81ufRDQSNcL._AC_US200_.jpg",asin:"B0GFCJ6WSJ",brand:"Babilous",units:306,revenue:21416.94,price:69.99,ratings:44,rating:4.3,date:"2026-02-19",days:142},{r:12,img:"https://images-na.ssl-images-amazon.com/images/I/81v+1fnMQQL._AC_US200_.jpg",asin:"B0GRB5MVBN",brand:"BABY JOY",units:299,revenue:17937.01,price:59.99,ratings:595,rating:4.5,date:"2026-03-13",days:120},{r:13,img:"https://images-na.ssl-images-amazon.com/images/I/91ehyJrxrcL._AC_US200_.jpg",asin:"B0FR4V816G",brand:"Pterying",units:285,revenue:31347.15,price:109.99,ratings:8,rating:4.5,date:"2026-03-11",days:122},{r:14,img:"https://images-na.ssl-images-amazon.com/images/I/7101XuaeFVL._AC_US200_.jpg",asin:"B0GH23JLMJ",brand:"Pamo babe",units:264,revenue:52797.36,price:199.99,ratings:30,rating:4.7,date:"2026-04-30",days:72},{r:15,img:"https://m.media-amazon.com/images/I/51VUWmnl4AL._SS200_.jpg",asin:"B0H1GGRG8W",brand:"suihuooo",units:241,revenue:36147.59,price:149.99,ratings:2,rating:1.5,date:"2026-05-21",days:51},{r:16,img:"https://images-na.ssl-images-amazon.com/images/I/71GejnCREwL._AC_US200_.jpg",asin:"B0G8JJLK1P",brand:"Decmuerx",units:207,revenue:14467.23,price:69.89,ratings:29,rating:3.8,date:"2026-03-27",days:106},{r:17,img:"https://m.media-amazon.com/images/I/510fW0A85aL._SS200_.jpg",asin:"B0G6KKB9M7",brand:"Decmuerx",units:206,revenue:17425.54,price:84.59,ratings:15,rating:4.3,date:"2026-04-18",days:84},{r:18,img:"https://m.media-amazon.com/images/I/51nPMcb4C5L._SS200_.jpg",asin:"B0GYP7PC99",brand:"Virplik",units:189,revenue:6802.11,price:35.99,ratings:7,rating:4.2,date:"2026-05-16",days:56},{r:19,img:"https://images-na.ssl-images-amazon.com/images/I/81uBc83L-YL._AC_US200_.jpg",asin:"B0GXXTX5J2",brand:"Ulnxiy",units:134,revenue:2410.66,price:17.99,ratings:5,rating:5.0,date:"2026-05-14",days:58},{r:20,img:"https://m.media-amazon.com/images/I/51VUWmnl4AL._SS200_.jpg",asin:"B0H2W1LDS8",brand:"suihuooo",units:6,revenue:899.94,price:149.99,ratings:62,rating:4.4,date:"2026-06-09",days:32}];
+
+const newProdBody = document.getElementById('newProdBody');
+newProducts10.forEach(p=>{
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td class="rank">${p.r}</td>
+    <td><img class="prod-img" src="${p.img}" loading="lazy" onerror="this.style.opacity=0.2"></td>
+    <td><a href="https://www.amazon.com/dp/${p.asin}" target="_blank" rel="noopener">${p.asin}</a></td>
+    <td>${p.brand}</td>
+    <td>${p.units.toLocaleString()}</td>
+    <td>$${p.revenue.toLocaleString(undefined,{maximumFractionDigits:0})}</td>
+    <td>$${p.price}</td>
+    <td>${p.ratings.toLocaleString()}</td>
+    <td>${p.rating} ★</td>
+    <td>${p.date}</td>
+    <td>${p.days}</td>`;
+  newProdBody.appendChild(tr);
+});
+
+// ---- 新品榜 Top20 卖点/痛点 + 真实买家评价摘录（原文取自 SellerSprite 评论接口，逐字摘录）----
+const newSellingPain = [
+{asin:"B0GD8Y27PV",model:"Graco 27PV",points:["内置玩具架","多档高度调节","加厚地垫防摔"],pain:{author:"Shellbean",verified:true,star:3,date:"2026-07-05",title:"Pain to assemble",text:"Other than the playpen, this is a pain in the butt to assemble. I dread the day when I have to put this back together when the baby gets here."}},
+{asin:"B0GGBJF4HN",model:"Pamo babe F4HN",points:["多档高度调节","双层设计带床垫"],pain:{author:"Becky Townsend",verified:true,star:1,date:"2026-05-11",title:"Only survived one use",text:"This was used one time and broke. When pulling up in the middle to collapse the bed, the main bracket underneath broke and this bed is now unusable. There was no extra force applied; the bracket has a large crack in it. Disappointing."}},
+{asin:"B0GGB6WK92",model:"Pamo babe WK92",points:["270度全景网面","加厚地垫防摔"],pain:{author:"Michael",verified:true,star:2,date:"2026-06-17",title:"Poor assembly",text:"0 real instructions on how to build this out. There's a booklet but it does not actually explain anything."}},
+{asin:"B0GVZV98TQ",model:"Boppy 98TQ",points:["双层设计带床垫","可折叠便携外出","加厚地垫防摔"],pain:null,painNote:"该ASIN评论区暂未采集到可摘录的文字评论（1-3星筛选范围内评论数过少或均为无文字内容的图片/视频评论）"},
+{asin:"B0G436SPCB",model:"Obee Odee SPCB",points:["带轮易移动","内置玩具架","可折叠便携外出"],pain:{author:"Way smaller than thought and suctions on back fall out on first use.",verified:true,star:3,date:"2026-06-21",title:"Great for travel, not for bedside and home mobility",text:"Make sure to assemble it in the room you're looking to keep it in because it does not fit through standard sized door frames. Will have to disassemble it to move it room to room. Had to buy a different bassinet for bedside."}},
+{asin:"B0FX3MPLGR",model:"GAIVE PLGR",points:["双层设计带床垫","一键折叠收纳"],pain:{author:"DORETH",verified:true,star:1,date:"2026-06-07",title:"It's ok",text:"I brought this thinking that I was going to be watching my baby close to me, but no my bed is way taller than the opening part. It's difficult to close and open. And the bassinet is also difficult to install and remove."}},
+{asin:"B0G3PRGQ3W",model:"Tinyiota GQ3W",points:["带轮易移动","透气网眼布"],pain:{author:"ACE",verified:true,star:3,date:"2026-03-19",title:"Could be better but okay!",text:"I wish the safety tags were outside or on the bottom of the pin. Also, I wish the sides were a bit more stable and the netting didn't have so much give. Also the zipper being on the inside is also questionable."}},
+{asin:"B0GS5FV32V",model:"ANGELBLISS V32V",points:["可折叠便携外出","双层设计带床垫","加厚地垫防摔"],pain:null,painNote:"该ASIN评论区暂未采集到可摘录的文字评论（1-3星筛选范围内评论数过少或均为无文字内容的图片/视频评论）"},
+{asin:"B0FZGTGJSM",model:"Trimigo GJSM",points:["内置玩具架","带轮易移动","透气网眼布"],pain:null,painNote:"该ASIN评论区暂未采集到可摘录的文字评论（1-3星筛选范围内评论数过少或均为无文字内容的图片/视频评论）"},
+{asin:"B0GD67TSD2",model:"IKALIFE TSD2",points:["透气网眼布","加厚地垫防摔"],pain:null,painNote:"该ASIN评论区暂未采集到可摘录的文字评论（1-3星筛选范围内评论数过少或均为无文字内容的图片/视频评论）"},
+{asin:"B0GFCJ6WSJ",model:"Babilous 6WSJ",points:["加厚地垫防摔","270度全景网面"],pain:null,painNote:"该ASIN评论区暂未采集到可摘录的文字评论（1-3星筛选范围内评论数过少或均为无文字内容的图片/视频评论）"},
+{asin:"B0GRB5MVBN",model:"BABY JOY MVBN",points:["可折叠便携外出","可拆卸尿布台","多档高度调节"],pain:null,painNote:"该ASIN评论区暂未采集到可摘录的文字评论（1-3星筛选范围内评论数过少或均为无文字内容的图片/视频评论）"},
+{asin:"B0FR4V816G",model:"Pterying 816G",points:["270度全景网面","双层设计带床垫","加厚地垫防摔"],pain:{author:"Linette Shepherd",verified:false,star:1,date:"2026-03-18",title:"Poor Lock Design, Unsafe",text:""}},
+{asin:"B0GH23JLMJ",model:"Pamo babe JLMJ",points:["双层设计带床垫","多档高度调节","带轮易移动"],pain:null,painNote:"该ASIN评论区暂未采集到可摘录的文字评论（1-3星筛选范围内评论数过少或均为无文字内容的图片/视频评论）"},
+{asin:"B0H1GGRG8W",model:"suihuooo RG8W",points:["可折叠便携外出","透气网眼布"],pain:null,painNote:"该ASIN评论区暂未采集到可摘录的文字评论（1-3星筛选范围内评论数过少或均为无文字内容的图片/视频评论）"},
+{asin:"B0G8JJLK1P",model:"Decmuerx LK1P",points:["270度全景网面","一键折叠收纳","加厚地垫防摔"],pain:null,painNote:"该ASIN评论区暂未采集到可摘录的文字评论（1-3星筛选范围内评论数过少或均为无文字内容的图片/视频评论）"},
+{asin:"B0G6KKB9M7",model:"Decmuerx B9M7",points:["透气网眼布","带轮易移动"],pain:null,painNote:"该ASIN评论区暂未采集到可摘录的文字评论（1-3星筛选范围内评论数过少或均为无文字内容的图片/视频评论）"},
+{asin:"B0GYP7PC99",model:"Virplik PC99",points:["多档高度调节","带轮易移动","透气网眼布"],pain:null,painNote:"该ASIN评论区暂未采集到可摘录的文字评论（1-3星筛选范围内评论数过少或均为无文字内容的图片/视频评论）"},
+{asin:"B0GXXTX5J2",model:"Ulnxiy X5J2",points:["带轮易移动","内置玩具架"],pain:null,painNote:"该ASIN评论区暂未采集到可摘录的文字评论（1-3星筛选范围内评论数过少或均为无文字内容的图片/视频评论）"},
+{asin:"B0H2W1LDS8",model:"suihuooo LDS8",points:["透气网眼布","可拆卸尿布台"],pain:{author:"Ashley Lauren",verified:true,star:2,date:"2026-06-15",title:"Improper materials",text:"The screws provided were not the ones in the instructions. Had to go to the hardware store to find screws that would work."}}
+];
+
+const newPainGrid = document.getElementById('newProdPainGrid');
+newSellingPain.forEach((sp,i)=>{
+  const prod = newProducts10.find(p=>p.asin===sp.asin) || {};
+  const stars = sp.pain ? '★'.repeat(sp.pain.star) + '☆'.repeat(5-sp.pain.star) : '';
+  const reviewHtml = sp.pain ? `
+    <div class="review-quote">
+      <span class="rq-label">真实买家差评摘录</span>
+      <div class="rq-top">
+        <span class="stars">${stars}</span>
+        <span class="${sp.pain.verified? 'vbadge':'unverified'}">${sp.pain.verified? 'Verified Purchase':'未标记Verified'}</span>
+        <span class="rq-author">${sp.pain.author}</span>
+        <span class="rq-date">${sp.pain.date}</span>
+      </div>
+      <div class="rq-title">"${sp.pain.title}"</div>
+      <div class="rq-text">${sp.pain.text}</div>
+    </div>` : `<div class="review-quote empty">${sp.painNote}</div>`;
+  const card = document.createElement('div');
+  card.className = 'prod-card';
+  card.innerHTML = `
+    <div class="prod-head">
+      <img src="${prod.img||''}" loading="lazy" onerror="this.style.opacity=0.2">
+      <div>
+        <h5>#${i+1} ${sp.model}</h5>
+        <div class="meta"><a href="https://www.amazon.com/dp/${sp.asin}" target="_blank" rel="noopener">${sp.asin}</a> · ${prod.brand||''}</div>
+        <div class="sp-tags">${sp.points.map(p=>`<span>${p}</span>`).join('')}</div>
+      </div>
+    </div>
+    ${reviewHtml}
+  `;
+  newPainGrid.appendChild(card);
+});
+
+// ---- Top20 卖点/痛点 + 真实买家评价摘录（原文取自 SellerSprite 评论接口，逐字摘录）----
+const sellingPain = [
+{asin:"B0BVLX15R2",model:"Hiaksedt 15R2",points:["带轮易移动","270度全景网面","可拆卸尿布台"],pain:{author:"steph mcdaniel",verified:true,star:3,date:"2026-07-05",title:"Not 50x50",text:"Not 50x50, my 50x50 mat doesn't fit on the inside flat. It's up on all 4 sides on the playpen."}},
+{asin:"B07WPW1YYC",model:"Dream On Me 1YYC",points:["带轮易移动","内置玩具架","一键折叠收纳"],pain:{author:"Raph Hardan",verified:true,star:3,date:"2026-07-03",title:"Not as described",text:"The sides of the playard are very hard to lock in and to unlock. The padded mat is extremely hard, not comfortable to have a baby sleep on it. We will have to purchase an extra mattress."}},
+{asin:"B09MWHG3ZT",model:"Graco G3ZT",points:["双层设计带床垫","带轮易移动","可拆卸尿布台"],pain:{author:"Emma",verified:true,star:1,date:"2026-07-03",title:"The mattress bent",text:"I had to return, because the mattress bent in the middle, where my baby was sleeping. She was well below the weight and age guidance."}},
+{asin:"B0CKTLQ791",model:"Jaobeem Q791",points:["透气网眼布","多档高度调节"],pain:{author:"Margret Herriman",verified:true,star:1,date:"2026-07-07",title:"Not user friendly",text:"Very hard to take down"}},
+{asin:"B0C5QXPFKB",model:"Fshibila PFKB",points:["透气网眼布","可折叠便携外出","内置玩具架"],pain:{author:"Jeison Ramirez",verified:true,star:1,date:"2026-07-07",title:"Incompleto",text:"Solo los palos vienen :("}},
+{asin:"B09ZDQ3C2Y",model:"Pamo babe 3C2Y",points:["可折叠便携外出","双层设计带床垫"],pain:{author:"eggstomyhammy",verified:true,star:3,date:"2026-06-21",title:"cute but hard to close up",text:"Decided to return it because when you try to close it back up, it's very narrow, and you have to wrap it 5 times in a circle vs 4 times like other pack plays. I'm having a very hard time trying to close the whole thing up and strap it closed."}},
+{asin:"B0CH2TZPL8",model:"XVISHX ZPL8",points:["双层设计带床垫","270度全景网面","透气网眼布"],pain:{author:"JustMe",verified:true,star:3,date:"2026-07-02",title:"Smaller than advertised",text:"Caution! This product is slighted in size. Dimensions say 50 x 50 x 27. Actual measurements when fully assembled are 48 3/4 x 48 3/4 x 25. The standard mats for a 50 x 50 will not fit at all."}},
+{asin:"B09Z2JP78L",model:"Fodoss P78L",points:["加厚地垫防摔","多档高度调节","270度全景网面"],pain:{author:"Durin",verified:true,star:1,date:"2026-07-06",title:"Very Disappointing Quality – Not Worth the Price",text:"I had high hopes for this playpen, but unfortunately it did not meet expectations at all. The play area feels quite small in person and quickly becomes cramped. Several parts did not feel particularly sturdy, raising concerns about baby safety. The materials and components felt cheaper than expected for the price."}},
+{asin:"B08BT16TH5",model:"Dream On Me 6TH5",points:["内置玩具架","带轮易移动","一键折叠收纳"],pain:{author:"Dawn Simon",verified:true,star:3,date:"2026-06-30",title:"Little difficult setting up, but other than that good quality",text:"Hard to get sides to snap in place but once setup I am happy with quality"}},
+{asin:"B0GD8Y27PV",model:"Graco 27PV",points:["内置玩具架","多档高度调节","加厚地垫防摔"],pain:{author:"Shellbean",verified:true,star:3,date:"2026-07-05",title:"Pain to assemble",text:"Other than the playpen, this is a pain in the butt to assemble. I dread the day when I have to put this back together when the baby gets here."}},
+{asin:"B07964SFW4",model:"Baby Trend SFW4",points:["双层设计带床垫","透气网眼布"],pain:{author:"Rikki Mcroberts",verified:true,star:1,date:"2026-06-28",title:"Too difficult to ise",text:"Does not lock open. Difficult moving around. And very flimsy"}},
+{asin:"B0BHYYP48V",model:"Dream On Me P48V",points:["内置玩具架","带轮易移动","加厚地垫防摔"],pain:{author:"Laura Piazza",verified:true,star:2,date:"2026-06-30",title:"Don't buy!",text:"Horribly difficult to install bassinet... was very awkward to break down... threw it out... stick with Graco!"}},
+{asin:"B08CMPTJ2S",model:"Pamo babe TJ2S",points:["一键折叠收纳","可折叠便携外出"],pain:{author:"Stephen R. Jaczko",verified:false,star:1,date:"2026-06-17",title:"Garbage - bassinet zipper broke",text:"We couldn't even use the bassinet before the zipper complete broke on the first attempt. Garbage! Do not buy!"}},
+{asin:"B0CKT7W65H",model:"Jaobeem W65H",points:["可拆卸尿布台","加厚地垫防摔","带轮易移动"],pain:{author:"Mark R. Turgeon",verified:true,star:2,date:"2026-07-05",title:"only for “children over 10 months”",text:"This playpen for babies is only suitable for 10 months an older. Not to mention the crappy looking make and quality."}},
+{asin:"B09MWJB3LF",model:"Graco B3LF",points:["双层设计带床垫","可折叠便携外出"],pain:null,painNote:"该ASIN评论区暂未采集到可摘录的文字评论（1-3星筛选范围内评论数过少或均为无文字内容的图片/视频评论）"},
+{asin:"B0FBRND77P",model:"UANLAUO D77P",points:["可拆卸尿布台","270度全景网面"],pain:{author:"Maria",verified:true,star:1,date:"2026-06-30",title:"No play mat for odd size",text:"I got the 69x59 and wish I didn't because it's impossible to find a non slip mat that fits inside it (interior dimensions are 65x56)."}},
+{asin:"B09Y8VGQPN",model:"Dripex GQPN",points:["可折叠便携外出","内置玩具架"],pain:{author:"M Carmen Garcia",verified:true,star:1,date:"2026-07-05",title:"Zipper is horrible",text:"Zipper immediately malfunctioned"}},
+{asin:"B0BS72HZXW",model:"Graco HZXW",points:["加厚地垫防摔","多档高度调节","内置玩具架"],pain:{author:"Nathan Scott",verified:false,star:1,date:"2026-01-04",title:"No manual",text:"Came without an assembly manual. Was probably a returned item and got sent to us incomplete. Shouldn't have been that hard to figure out but it took us twice as long to get it put together than it should have."}},
+{asin:"B0BMFQFZSH",model:"Pamo babe FZSH",points:["双层设计带床垫","270度全景网面"],pain:{author:"Sweetpea268",verified:false,star:1,date:"2026-05-20",title:"Trust the reviews",text:"Firstly - the playpen does not stand up straight - the bar in the middle is not sturdy and looks like will eventually poke out. Secondly - the quality is flimsy and unstable. Thirdly - the padding was thin and a lot of the parts did not fit securely, which are major concerns for a baby product!"}},
+{asin:"B0D8W5XFQ8",model:"Funsland XFQ8",points:["多档高度调节","透气网眼布"],pain:{author:"Crystal S Cutler",verified:true,star:3,date:"2026-05-11",title:"Needs a mat",text:"It needs a mat inside. If a baby falls inside they will hurt their head."}}
+];;
+
+const painGrid = document.getElementById('prodPainGrid');
+sellingPain.forEach((sp,i)=>{
+  const prod = top20.find(p=>p.asin===sp.asin) || {};
+  const stars = sp.pain ? '★'.repeat(sp.pain.star) + '☆'.repeat(5-sp.pain.star) : '';
+  const reviewHtml = sp.pain ? `
+    <div class="review-quote">
+      <span class="rq-label">真实买家差评摘录</span>
+      <div class="rq-top">
+        <span class="stars">${stars}</span>
+        <span class="${sp.pain.verified? 'vbadge':'unverified'}">${sp.pain.verified? 'Verified Purchase':'未标记Verified'}</span>
+        <span class="rq-author">${sp.pain.author}</span>
+        <span class="rq-date">${sp.pain.date}</span>
+      </div>
+      <div class="rq-title">"${sp.pain.title}"</div>
+      <div class="rq-text">${sp.pain.text}</div>
+    </div>` : `<div class="review-quote empty">${sp.painNote}</div>`;
+  const card = document.createElement('div');
+  card.className = 'prod-card';
+  card.innerHTML = `
+    <div class="prod-head">
+      <img src="${prod.img||''}" loading="lazy" onerror="this.style.opacity=0.2">
+      <div>
+        <h5>#${i+1} ${sp.model}</h5>
+        <div class="meta"><a href="https://www.amazon.com/dp/${sp.asin}" target="_blank" rel="noopener">${sp.asin}</a> · ${prod.brand||''}</div>
+        <div class="sp-tags">${sp.points.map(p=>`<span>${p}</span>`).join('')}</div>
+      </div>
+    </div>
+    ${reviewHtml}
+  `;
+  painGrid.appendChild(card);
+});
+
+Chart.defaults.font.family = "Segoe UI, PingFang SC, Microsoft YaHei, Arial, sans-serif";
+Chart.defaults.color = "#4b5563";
+
+// Google Trend
+new Chart(document.getElementById('trendChart'), {
+  type:'line',
+  data:{
+    labels:['2021-07', '2021-08', '2021-09', '2021-10', '2021-11', '2021-12', '2022-01', '2022-02', '2022-03', '2022-04', '2022-05', '2022-06', '2022-07', '2022-08', '2022-09', '2022-10', '2022-11', '2022-12', '2023-01', '2023-02', '2023-03', '2023-04', '2023-05', '2023-06', '2023-07', '2023-08', '2023-09', '2023-10', '2023-11', '2023-12', '2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12', '2025-01', '2025-02', '2025-03', '2025-04', '2025-05', '2025-06', '2025-07', '2025-08', '2025-09', '2025-10', '2025-11', '2025-12', '2026-01', '2026-02', '2026-03', '2026-04', '2026-05', '2026-06', '2026-07'],
+    datasets:[{
+      label:'Google 搜索热度指数 ("baby playard")',
+      data:[10, 14, 13, 13, 15, 12, 14, 15, 15, 13, 15, 14, 15, 13, 11, 11, 12, 10, 10, 12, 11, 12, 13, 13, 15, 11, 10, 7, 10, 9, 9, 10, 10, 9, 11, 11, 14, 12, 12, 10, 10, 12, 12, 12, 13, 11, 13, 13, 16, 15, 12, 12, 15, 12, 15, 14, 27, 78, 65, 70, 8],
+      borderColor:'#2f6fed', backgroundColor:'rgba(47,111,237,0.12)',
+      fill:true, tension:0.35, pointRadius:0, borderWidth:2.5
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{ x:{ticks:{maxTicksLimit:12}}, y:{beginAtZero:true, title:{display:true,text:'指数(0-100)'}} }
+  }
+});
+
+// Price distribution
+new Chart(document.getElementById('priceChart'), {
+  type:'bar',
+  data:{
+    labels:['$0-50','$50-100','$100-150','$150-200','$200-250','$250以上'],
+    datasets:[
+      {label:'商品数', data:[20, 35, 23, 16, 4, 2], backgroundColor:'#93b6f7', yAxisID:'y'},
+      {label:'销量占比(%)', data:[41.47, 32.31, 12.4, 8.71, 4.43, 0.67], backgroundColor:'#ff8a5b', yAxisID:'y1', type:'line', tension:.3, pointRadius:3}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    scales:{
+      y:{position:'left', title:{display:true,text:'商品数'}},
+      y1:{position:'right', grid:{drawOnChartArea:false}, title:{display:true,text:'销量占比(%)'}}
+    }
+  }
+});
+
+// Rating distribution
+new Chart(document.getElementById('ratingChart'), {
+  type:'bar',
+  data:{
+    labels:['<2.0','2.0-3.0','3.0-3.5','3.5-4.0','4.0-4.3','4.3-4.5','4.5+'],
+    datasets:[{label:'销量占比(%)', data:[0.0, 0.0, 0.0, 0.0, 1.48, 44.9, 53.62], backgroundColor:'#2f6fed'}]
+  },
+  options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, indexAxis:'y'}
+});
+
+// Ratings count distribution
+new Chart(document.getElementById('ratingsCountChart'), {
+  type:'bar',
+  data:{
+    labels:['无评分数','1-50','50-100','100-200','200-300','300-500','500以上'],
+    datasets:[{label:'销量占比(%)', data:[0.0, 1.26, 1.84, 3.88, 4.35, 4.92, 83.75], backgroundColor:'#ff8a5b'}]
+  },
+  options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, indexAxis:'y'}
+});
+
+// Listing date distribution
+new Chart(document.getElementById('listingDateChart'), {
+  type:'bar',
+  data:{
+    labels:['3个月','半年','1年','1年半','2年','2年半','3年','3年以上'],
+    datasets:[{label:'销量占比(%)', data:[0.33, 4.71, 7.25, 3.01, 7.2, 2.23, 15.74, 59.53], backgroundColor:'#2f6fed'}]
+  },
+  options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}}
+});
+
+// Brand concentration donut
+new Chart(document.getElementById('brandChart'), {
+  type:'doughnut',
+  data:{
+    labels:['Dream On Me','Pamo babe','Graco','Hiaksedt','XVISHX','Jaobeem','其他(61个品牌)'],
+    datasets:[{
+      data:[8.28, 18.71, 14.49, 3.96, 1.89, 2.28, 50.39],
+      backgroundColor:['#2f6fed','#5b9bf5','#1d4fb8','#ff8a5b','#ffb088','#8fd3c7','#d8e0ee']
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:'bottom'}, title:{display:true,text:'销售额份额占比(%)'} }
+  }
+});
+
+// ---- 可变动利润测算器（对标卖家精灵利润测算模板） ----
+const pcFmt$ = n => (n<0?'-$':'$') + Math.abs(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+const pcFmt0 = n => (n<0?'-$':'$') + Math.abs(n).toLocaleString(undefined,{maximumFractionDigits:0});
+const pcVal = id => parseFloat(document.getElementById(id).value) || 0;
+
+// ---- 本地保存/恢复：把输入的数值存进浏览器 localStorage，刷新/重新打开这份HTML时自动带回来 ----
+const PC_STORAGE_KEY = 'babyPlayardsReport_profitCalc_v1';
+const PC_FIELD_IDS = ['pcPrice','pcUnits','pcCogs','pcFreight','pcOtherLog','pcTariffRate','pcImportFees',
+  'pcReferralRate','pcReferralMin','pcFba','pcStorage','pcAcos','pcOtherMkt','pcReturnRate','pcRefundFee'];
+
+function pcSave(){
+  const statusEl = document.getElementById('pcSaveStatus');
+  try{
+    const data = {};
+    PC_FIELD_IDS.forEach(id => data[id] = document.getElementById(id).value);
+    localStorage.setItem(PC_STORAGE_KEY, JSON.stringify(data));
+    if(statusEl){
+      const t = new Date().toLocaleString();
+      statusEl.textContent = '已自动保存到本机浏览器（' + t + '），下次用同一浏览器打开此文件会自动带回这些数字。';
+    }
+  }catch(e){
+    if(statusEl){
+      statusEl.textContent = '当前浏览器/打开方式不支持本地自动保存，刷新或关闭页面后输入的数字会丢失，建议截图保存或手动记录参数。';
+    }
+  }
+}
+
+function pcRestore(){
+  try{
+    const raw = localStorage.getItem(PC_STORAGE_KEY);
+    if(!raw) return;
+    const data = JSON.parse(raw);
+    PC_FIELD_IDS.forEach(id => {
+      if(data[id] !== undefined && data[id] !== '') document.getElementById(id).value = data[id];
+    });
+  }catch(e){ /* 静默失败，保持默认值 */ }
+}
+
+let pcChart = null;
+function pcInitChart(){
+  pcChart = new Chart(document.getElementById('pcChart'), {
+    type:'doughnut',
+    data:{
+      labels:['产品成本(含头程)','关税/报关杂费','平台佣金','FBA费用','仓储费','广告费','退货/其他成本','净利润'],
+      datasets:[{
+        data:[0,0,0,0,0,0,0,0],
+        backgroundColor:['#93b6f7','#7c3aed','#2f6fed','#ff8a5b','#ffb088','#f5a623','#dc2626','#16a34a']
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{position:'bottom', labels:{boxWidth:11,font:{size:10.5}}}, title:{display:true,text:'月度利润构成（占总收入%）'} }
+    }
+  });
+}
+
+function pcCalc(){
+  const price = pcVal('pcPrice'), units = pcVal('pcUnits');
+  const cogs = pcVal('pcCogs'), freight = pcVal('pcFreight'), otherLog = pcVal('pcOtherLog');
+  const tariffRate = pcVal('pcTariffRate'), importFeesRate = pcVal('pcImportFees');
+  const referralRate = pcVal('pcReferralRate'), referralMin = pcVal('pcReferralMin');
+  const fba = pcVal('pcFba'), storage = pcVal('pcStorage');
+  const acos = pcVal('pcAcos'), otherMkt = pcVal('pcOtherMkt');
+  const returnRate = pcVal('pcReturnRate'), refundFee = pcVal('pcRefundFee');
+
+  const revenue = price*units;
+  const returnLostRevenue = revenue*returnRate/100;
+  const referralPerUnit = Math.max(price*referralRate/100, referralMin);
+  const referralTotal = referralPerUnit*units;
+  const fbaTotal = fba*units;
+  const storageTotal = storage*units;
+  const cogsTotal = (cogs+freight+otherLog)*units;
+  const dutiableValuePerUnit = cogs+freight;
+  const tariffPerUnit = dutiableValuePerUnit*tariffRate/100;
+  const importFeesPerUnit = dutiableValuePerUnit*importFeesRate/100;
+  const tariffTotal = tariffPerUnit*units;
+  const importFeesTotal = importFeesPerUnit*units;
+  const tariffAndFeesTotal = tariffTotal + importFeesTotal;
+  const adTotal = revenue*acos/100;
+  const otherMktTotal = otherMkt*units;
+  const refundFeeTotal = refundFee*units*returnRate/100;
+  const otherCostLump = returnLostRevenue + refundFeeTotal + otherMktTotal;
+
+  const grossProfit = revenue - referralTotal - fbaTotal - storageTotal - cogsTotal - tariffAndFeesTotal;
+  const grossMargin = revenue>0 ? grossProfit/revenue*100 : 0;
+  const netProfit = grossProfit - adTotal - otherCostLump;
+  const netMargin = revenue>0 ? netProfit/revenue*100 : 0;
+  const perUnitProfit = units>0 ? netProfit/units : 0;
+  const totalInvestment = cogsTotal + tariffAndFeesTotal;
+  const roi = totalInvestment>0 ? netProfit/totalInvestment*100 : 0;
+  const breakEvenAcos = revenue>0 ? Math.max(0,(grossProfit - otherCostLump)/revenue*100) : 0;
+
+  const stats = document.getElementById('pcStats');
+  const box = (label, val, neg) => `<div class="stat-box"><div class="v${neg?' neg':''}">${val}</div><div class="l">${label}</div></div>`;
+  stats.innerHTML =
+    box('月总收入', pcFmt0(revenue)) +
+    box('关税+报关杂费/件', pcFmt$(tariffPerUnit+importFeesPerUnit)) +
+    box('月度关税+杂费总额', pcFmt0(tariffAndFeesTotal)) +
+    box('毛利润（扣佣金/FBA/仓储/产品成本/关税）', pcFmt0(grossProfit), grossProfit<0) +
+    box('毛利率', grossMargin.toFixed(1)+'%', grossMargin<0) +
+    box('月净利润（再扣广告/退货/其他）', pcFmt0(netProfit), netProfit<0) +
+    box('净利率', netMargin.toFixed(1)+'%', netMargin<0) +
+    box('单件净利润', pcFmt$(perUnitProfit), perUnitProfit<0) +
+    box('ROI（净利润/产品成本+关税投入）', roi.toFixed(0)+'%', roi<0) +
+    box('盈亏平衡ACOS上限', breakEvenAcos.toFixed(1)+'%', breakEvenAcos<0);
+
+  if(pcChart){
+    const denom = revenue>0 ? revenue : 1;
+    const pct = v => Math.max(v,0)/denom*100;
+    pcChart.data.datasets[0].data = [
+      pct(cogsTotal), pct(tariffAndFeesTotal), pct(referralTotal), pct(fbaTotal), pct(storageTotal),
+      pct(adTotal), pct(otherCostLump), pct(Math.max(netProfit,0))
+    ];
+    pcChart.update();
+  }
+
+  pcSave();
+}
+
+function pcReset(){
+  ['pcPrice','pcUnits','pcCogs','pcFreight','pcOtherLog','pcFba','pcStorage','pcOtherMkt','pcRefundFee'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('pcReferralRate').value = 15;
+  document.getElementById('pcReferralMin').value = 0.30;
+  document.getElementById('pcTariffRate').value = 35;
+  document.getElementById('pcImportFees').value = 0.47;
+  document.getElementById('pcAcos').value = 15;
+  document.getElementById('pcReturnRate').value = 5;
+  try{ localStorage.removeItem(PC_STORAGE_KEY); }catch(e){}
+  pcCalc();
+}
+
+pcInitChart();
+pcRestore();
+pcCalc();
+
+</script>
+</body>
+</html>
